@@ -26,6 +26,7 @@ public class UsuarioServicesImpl implements UsuarioServices{
         Usuario usuario = new Usuario();
         usuario.setUsername(username);
         usuario.setPassword(passwordEncoder.encode(password));
+        usuario.setMonedas(0);
         return usuarioRepository.save(usuario);
     }
 	
