@@ -6,6 +6,7 @@ import java.util.Set;
 
 import com.arjona.f1gameinfo.business.model.Circuito;
 import com.arjona.f1gameinfo.business.model.Piloto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
@@ -28,6 +29,7 @@ public class Usuario {
     @Column(unique = true, nullable = false)
     private String username;
 
+    @JsonIgnore
     @Column(nullable = false)
     private String password;
 
