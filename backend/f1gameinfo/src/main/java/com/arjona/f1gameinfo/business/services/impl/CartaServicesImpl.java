@@ -1,7 +1,13 @@
 package com.arjona.f1gameinfo.business.services.impl;
 
-import org.springframework.stereotype.Service;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.arjona.f1gameinfo.business.repositores.CartaUsuarioRepository;
 import com.arjona.f1gameinfo.business.repositores.CircuitoRepository;
 import com.arjona.f1gameinfo.business.repositores.PilotoRepository;
 import com.arjona.f1gameinfo.business.services.CartaServices;
@@ -10,6 +16,8 @@ import com.arjona.f1gameinfo.security.integration.repositories.UsuarioRepository
 
 import jakarta.transaction.Transactional;
 
+import com.arjona.f1gameinfo.business.model.CartaUsuario;
+import com.arjona.f1gameinfo.business.model.CartaUsuarioDTO;
 import com.arjona.f1gameinfo.business.model.Circuito;
 import com.arjona.f1gameinfo.business.model.Piloto;
 
@@ -22,16 +30,15 @@ public class CartaServicesImpl implements CartaServices{
 	
 	private PilotoRepository pilotoRepository;
 
-	
+	private CartaUsuarioRepository cartaUsuarioRepository;
 
 	public CartaServicesImpl(UsuarioRepository usuarioRepository, CircuitoRepository circuitoRepository,
-			PilotoRepository pilotoRepository) {
+			PilotoRepository pilotoRepository, CartaUsuarioRepository cartaUsuarioRepository) {
 		this.usuarioRepository = usuarioRepository;
 		this.circuitoRepository = circuitoRepository;
 		this.pilotoRepository = pilotoRepository;
+		this.cartaUsuarioRepository = cartaUsuarioRepository;
 	}
-
-
 
 	@Transactional
 	@Override
@@ -61,7 +68,34 @@ public class CartaServicesImpl implements CartaServices{
 		
 		usuarioRepository.save(usuario);
 	}
-	
-	
 
+	@Override
+	public List<CartaUsuarioDTO> getAllDtos() {
+		return cartaUsuarioRepository.getAllDtos();
+	}
+
+	@Override
+	public void subirCarta(Long id, Integer valoracion, MultipartFile imagen) {
+		if(! usuarioRepository.existsById(id))
+			throw new IllegalStateException("Usuario no existente.");
+		
+		Usuario usuario = usuarioRepository.findById(id).get();
+		
+		String rutaImg = "uploads/images/" + imagen.getOriginalFilename();
+		File file = new File(rutaImg);
+		
+		try {
+			imagen.transferTo(file);
+		} catch (IOException e) {
+			throw new IllegalStateException("Error con la imagen.");
+		}
+		
+		CartaUsuario carta = new CartaUsuario();
+		carta.setUsuario(usuario);
+		carta.setValoracion(valoracion);
+		carta.setRutaImagen("/uploads/images/" + imagen.getOriginalFilename());
+		
+		cartaUsuarioRepository.save(carta);
+	}
+	
 }
