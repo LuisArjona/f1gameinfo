@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.arjona.f1gameinfo.business.model.CartaCompradaDTO;
 import com.arjona.f1gameinfo.business.model.CartaUsuarioDTO;
 import com.arjona.f1gameinfo.business.services.CartaServices;
 
@@ -39,6 +40,16 @@ public class CartaController {
 	@GetMapping("/usuarios")
 	public List<CartaUsuarioDTO> getAllDtos(){
 		return cartaServices.getAllDtos();
+	}
+	
+	@GetMapping("/usuarios/{id}")
+	public CartaUsuarioDTO getCartaUsuarioFromUsuario(@PathVariable Long id){
+		return cartaServices.getCartaUsuario(id);
+	}
+	
+	@GetMapping("/{id}")
+	public CartaCompradaDTO getCompradasUsuario(@PathVariable Long id) {
+		return cartaServices.getCartasCompradasFromUsuario(id);
 	}
 	
 	@PostMapping("/uploads/{id}")

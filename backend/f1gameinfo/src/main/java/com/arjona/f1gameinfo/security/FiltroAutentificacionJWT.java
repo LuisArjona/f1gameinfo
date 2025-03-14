@@ -28,7 +28,7 @@ public class FiltroAutentificacionJWT extends OncePerRequestFilter{
 	 
 	 private static final List<String> RUTAS_PUBLICAS = List.of(
 	            "/autentificacion/",
-	            "/uploads/imagess/");
+	            "/uploads/images/");
 	 
 	 @Override
 	 protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {

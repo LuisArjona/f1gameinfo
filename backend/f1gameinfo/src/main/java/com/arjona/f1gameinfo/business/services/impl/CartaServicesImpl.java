@@ -16,6 +16,7 @@ import com.arjona.f1gameinfo.security.integration.repositories.UsuarioRepository
 
 import jakarta.transaction.Transactional;
 
+import com.arjona.f1gameinfo.business.model.CartaCompradaDTO;
 import com.arjona.f1gameinfo.business.model.CartaUsuario;
 import com.arjona.f1gameinfo.business.model.CartaUsuarioDTO;
 import com.arjona.f1gameinfo.business.model.Circuito;
@@ -96,6 +97,18 @@ public class CartaServicesImpl implements CartaServices{
 		carta.setRutaImagen("/uploads/images/" + imagen.getOriginalFilename());
 		
 		cartaUsuarioRepository.save(carta);
+	}
+
+	@Override
+	public CartaUsuarioDTO getCartaUsuario(Long id) {
+		CartaUsuarioDTO carta = cartaUsuarioRepository.getCartaUsuarioFromUsuario(id)
+				.orElseThrow(() -> new IllegalStateException("El usuario no tiene carta creada."));
+		return carta;
+	}
+
+	@Override
+	public CartaCompradaDTO getCartasCompradasFromUsuario(Long id) {
+		return usuarioRepository.getCartasCompradasByUsuarioId(id);
 	}
 	
 }
