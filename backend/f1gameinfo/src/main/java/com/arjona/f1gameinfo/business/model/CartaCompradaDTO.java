@@ -1,13 +1,13 @@
 package com.arjona.f1gameinfo.business.model;
 
-import java.util.List;
+import java.util.Set;
 
 public class CartaCompradaDTO {
 	
-	private List<Piloto> pilotos;
-	private List<Circuito> circuitos;
+	private Set<Piloto> pilotos;
+	private Set<Circuito> circuitos;
 	
-	public CartaCompradaDTO(List<Piloto> pilotos, List<Circuito> circuitos) {
+	public CartaCompradaDTO(Set<Piloto> pilotos, Set<Circuito> circuitos) {
 		this.pilotos = pilotos;
 		this.circuitos = circuitos;
 	}
@@ -16,23 +16,20 @@ public class CartaCompradaDTO {
 		
 	}
 
-	public List<Piloto> getPilotos() {
+	public Set<Piloto> getPilotos() {
 		return pilotos;
 	}
 
-	public void setPilotos(List<Piloto> pilotos) {
+	public void setPilotos(Set<Piloto> pilotos) {
 		this.pilotos = pilotos;
 	}
 
-	public List<Circuito> getCircuitos() {
+	public Set<Circuito> getCircuitos() {
 		return circuitos;
 	}
 
-	public void setCircuitos(List<Circuito> circuitos) {
+	public void setCircuitos(Set<Circuito> circuitos) {
 		this.circuitos = circuitos;
 	}
 	
-	
-	
-
 }

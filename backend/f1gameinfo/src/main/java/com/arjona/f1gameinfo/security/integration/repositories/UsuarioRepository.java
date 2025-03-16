@@ -2,12 +2,12 @@ package com.arjona.f1gameinfo.security.integration.repositories;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-
-import com.arjona.f1gameinfo.business.model.CartaCompradaDTO;
+import com.arjona.f1gameinfo.business.model.Circuito;
+import com.arjona.f1gameinfo.business.model.Piloto;
 import com.arjona.f1gameinfo.business.model.UsuarioDTO;
 import com.arjona.f1gameinfo.security.integration.model.Usuario;
 
@@ -26,11 +26,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
             + "ORDER BY SIZE(u.pilotos) + SIZE(u.circuitos) DESC")
 	List<UsuarioDTO> getAllUsuariosRanking();
 	
-	@Query("SELECT new com.arjona.f1gameinfo.business.model.CartasCompradasDTO("
-	        + "u.pilotos, "
-	        + "u.circuitos) "
-	        + "FROM Usuario u "
-	        + "WHERE u.id = :idUsuario")
-	CartaCompradaDTO getCartasCompradasByUsuarioId(@Param("idUsuario") Long idUsuario);
+    Set<Piloto> findPilotosById(Long id);
+    
+    Set<Circuito> findCircuitosById(Long id);
 
 }

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import java.util.Set;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -108,7 +109,11 @@ public class CartaServicesImpl implements CartaServices{
 
 	@Override
 	public CartaCompradaDTO getCartasCompradasFromUsuario(Long id) {
-		return usuarioRepository.getCartasCompradasByUsuarioId(id);
+		if(! usuarioRepository.existsById(id))
+			throw new IllegalStateException("Usuario no existente.");
+		Set<Piloto> pilotos = usuarioRepository.findPilotosById(id);
+		Set<Circuito> circuitos = usuarioRepository.findCircuitosById(id);
+		return new CartaCompradaDTO(pilotos, circuitos);
 	}
 	
 }
