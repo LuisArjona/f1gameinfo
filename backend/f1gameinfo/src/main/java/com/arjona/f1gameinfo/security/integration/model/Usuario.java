@@ -6,6 +6,7 @@ import java.util.Set;
 
 import com.arjona.f1gameinfo.business.model.Circuito;
 import com.arjona.f1gameinfo.business.model.Piloto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
@@ -28,6 +29,7 @@ public class Usuario {
     @Column(unique = true, nullable = false)
     private String username;
 
+    @JsonIgnore
     @Column(nullable = false)
     private String password;
 
@@ -47,16 +49,19 @@ public class Usuario {
     )
     private Set<Circuito> circuitos = new HashSet<>();
     
+    private Integer monedas;
+    
 	public Usuario() {
 	}
 
-	public Usuario(Long id, String username, String password, Set<Piloto> pilotos, Set<Circuito> circuitos) {
+	public Usuario(Long id, String username, String password, Set<Piloto> pilotos, Set<Circuito> circuitos, Integer monedas) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.pilotos = pilotos;
 		this.circuitos = circuitos;
-	}
+		this.monedas = monedas;
+		}
 
 	public Long getId() {
 		return id;
@@ -89,6 +94,10 @@ public class Usuario {
 	public void setPilotos(Set<Piloto> pilotos) {
 		this.pilotos = pilotos;
 	}
+	
+	public void addPiloto(Piloto piloto) {
+		this.pilotos.add(piloto);
+	}
 
 	public Set<Circuito> getCircuitos() {
 		return circuitos;
@@ -97,10 +106,24 @@ public class Usuario {
 	public void setCircuitos(Set<Circuito> circuitos) {
 		this.circuitos = circuitos;
 	}
+	
+	public void addCircuito(Circuito circuito) {
+		this.circuitos.add(circuito);
+	}
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
+	}
+	
+	
+
+	public Integer getMonedas() {
+		return monedas;
+	}
+
+	public void setMonedas(Integer monedas) {
+		this.monedas = monedas;
 	}
 
 	@Override

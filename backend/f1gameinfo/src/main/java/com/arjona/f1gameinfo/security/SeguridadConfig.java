@@ -23,7 +23,7 @@ public class SeguridadConfig {
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/autentificacion/**").permitAll()
-                .requestMatchers("/uploads/imagess/**").permitAll()
+                .requestMatchers("/uploads/images/**").permitAll()
                 .anyRequest().authenticated())
             .addFilterBefore(filtroAutentificacionJWT(), UsernamePasswordAuthenticationFilter.class);
 
