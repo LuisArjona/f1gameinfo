@@ -1,0 +1,46 @@
+<form [formGroup]="form" (ngSubmit)="registrarUsuario(); form.reset()">
+
+  <div>
+    <label for="email">Email</label> <br>
+    <input type="text" formControlName="email" placeholder="Introduce tu email">
+    @if(form.get("email")?.invalid && form.get("email")?.touched){
+      @if(form.get("email")?.errors?.["required"]){
+        <small>El email es obligatorio</small>
+      }
+      @if(form.get("email")?.errors?.["email"]){
+        <small>No es un email valido</small>
+      }
+    }
+  </div>
+
+  <div>
+    <label for="passwd">Contraseña</label> <br>
+    <input type="password" formControlName="pass" placeholder="Escribe tu contraseña">
+    @if(form.get("pass")?.invalid && form.get("pass")?.touched){
+      @if(form.get("pass")?.errors?.["required"]){
+        <small>La contraseña es obligatoria.</small>
+      }
+      @if(form.get("pass")?.errors?.["minlength"]){
+        <small>La contraseña necesita al menos 8 caracteres.</small>
+      }
+    }
+  </div>
+  <div>
+    <label for="confirm_pass">Confirmar contraseña</label> <br>
+    <input type="password" formControlName="confirm_pass" placeholder="Confirma la contraseña">
+    @if(form.get("confirm_pass")?.invalid && form.get("confirm_pass")?.touched){
+      @if(form.get("confirm_pass")?.errors?.["required"]){
+        <small>Tienes que confirmar la contraseña</small>
+      }
+    }
+    @if(form.get('pass')?.value !== form.get('confirm_pass')?.value && form.get('confirm_pass')?.touched && form.get('pass')?.touched){
+      <small>Las contraseñas no coinciden</small>
+    }
+  </div>
+  @if(registrado){
+    <p>Registrado exitosamente</p>
+  }
+  <br>
+  <button type="submit" [disabled]="form.invalid">Register</button>
+</form>
+
