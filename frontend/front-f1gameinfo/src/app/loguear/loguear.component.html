@@ -1,26 +1,28 @@
 <div class="login-container">
   <form (ngSubmit)="loguearUsuario()" class="login-form">
+    <div class="logo-container">
+      <img src="favicon.png" alt="F1GameInfo Logo" class="logo">
+      <h1 class="app-title">F1GameInfo</h1>
+    </div>
     <h2>Iniciar Sesión</h2>
-
     <label class="login-label">
       Email:
       <input type="email" [(ngModel)]="email" name="email" required class="login-input">
     </label>
-
     <label class="login-label">
-      Password:
-      <input type="password" [(ngModel)]="pass" name="password" required class="login-input">
+      Contraseña:
+      <div class="password-container">
+        <input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="pass" name="password" required class="login-input">
+        <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">
+          <i [class]="showPassword ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'" aria-hidden="true"></i>
+        </button>
+      </div>
     </label>
-
-    <button type="submit" class="login-button">Login</button>
-
-    @if(intentado){
+    <button type="submit" class="login-button">Iniciar Sesión</button>
+    @if(intentado) {
       <div class="login-message">
-        @if(exito){
-          <p class="success-message">Login exitoso!</p>
-          this.router.navigate(["/dashboard"]);
-        }@else {
-          <p class="error-message">Login fallido, puedes crear una cuenta <a [routerLink]="['/register']" routerLinkActive="router-link-active">aquí</a>.</p>
+        @if(!exito) {
+          <p class="error-message">¿Necesitas crear una <a [routerLink]="['/register']" routerLinkActive="router-link-active">cuenta</a>?</p>
         }
       </div>
     }
