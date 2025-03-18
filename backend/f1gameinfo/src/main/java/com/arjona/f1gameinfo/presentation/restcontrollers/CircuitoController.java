@@ -2,6 +2,7 @@ package com.arjona.f1gameinfo.presentation.restcontrollers;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.arjona.f1gameinfo.business.model.Circuito;
 import com.arjona.f1gameinfo.business.services.CircuitoServices;
 
+@CrossOrigin
 @RequestMapping("/circuitos")
 @RestController
 public class CircuitoController {

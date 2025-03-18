@@ -3,6 +3,7 @@ package com.arjona.f1gameinfo.presentation.restcontrollers;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import com.arjona.f1gameinfo.business.model.CartaCompradaDTO;
 import com.arjona.f1gameinfo.business.model.CartaUsuarioDTO;
 import com.arjona.f1gameinfo.business.services.CartaServices;
 
+@CrossOrigin
 @RequestMapping("/cartas")
 @RestController
 public class CartaController {
