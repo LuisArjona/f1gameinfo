@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { CartaService } from '../carta.service';
 import { RouterModule } from '@angular/router'; 
 import { CommonModule } from '@angular/common';

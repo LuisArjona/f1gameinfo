@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { CartaService } from '../carta.service';
-import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
 
 @Component({

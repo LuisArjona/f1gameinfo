@@ -3,8 +3,6 @@ import { CartaService } from '../carta.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { RouterModule } from '@angular/router'; 
 import { CommonModule } from '@angular/common';
-import { NgModel } from '@angular/forms';
-import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
