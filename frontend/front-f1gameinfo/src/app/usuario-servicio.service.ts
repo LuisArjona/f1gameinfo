@@ -9,8 +9,8 @@ export class UsuarioServicioService {
 
   constructor(private http: HttpClient) { }
 
-  registrarUsuarioDos(email:string,pass:string):void{
-    this.http.post('http://localhost:8080/autentificacion/registro', {"username": email, "password":pass}).subscribe((data)=>{console.log(data)});
+  registrarUsuarioDos(email:string,pass:string): Observable<any>{
+    return this.http.post('http://localhost:8080/autentificacion/registro', {"username": email, "password":pass});
   }
 
   loguearUsuarioDos(email:string,pass:string): Observable<any>{

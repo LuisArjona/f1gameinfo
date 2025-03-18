@@ -1,36 +1,108 @@
-form {
-  max-width: 400px;
-  margin: 20px auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
 }
 
-div {
-  margin-bottom: 15px;
-}
-
-label {
-  font-weight: bold;
-  margin-bottom: 5px;
-  display: block;
-}
-
-input[type="text"],
-input[type="password"] {
+.register-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  padding: 10px;
+  height: 100%;
+  background: url('../../assets/public/fondo.avif') no-repeat center center fixed;
+  background-size: cover;
+  filter: blur(4px); /* Aplicar desenfoque a la imagen de fondo */
+  z-index: -1; /* Asegurar que está detrás del contenido */
+}
+
+.register-form {
+  z-index: 1; /* Elevar el formulario para que esté sobre el fondo */
+  position: relative;
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  width: 320px;
+  text-align: center;
+  border: 2px solid #d71920;
+}
+
+.register-form h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  color: #d71920;
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.logo {
+  width: 100px;
+  height: auto;
+  margin-bottom: 0.5rem;
+}
+
+.app-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #d71920;
+  margin: 0;
+}
+
+.register-label {
+  display: block;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  color: #333;
+  text-align: left;
+}
+
+.register-input {
+  width: 100%;
+  padding: 0.7rem;
+  margin-top: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 4px;
-  transition: border-color 0.3s;
+  font-size: 1rem;
+  box-sizing: border-box;
 }
 
-input[type="text"]:focus,
-input[type="password"]:focus {
-  border-color: #007bff;
-  outline: none;
+.register-button {
+  background-color: #d71920;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  width: 100%;
+  margin-top: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.register-button:hover {
+  background-color: #b7151a;
+  transform: scale(1.02);
+}
+
+.register-button:active {
+  background-color: #8f0f14;
+  transform: scale(0.98);
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+  text-align: center;
 }
 
 small {
@@ -38,31 +110,4 @@ small {
   font-size: 0.9em;
   display: block;
   margin-top: 5px;
-}
-
-button[type="submit"] {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
-  background-color: #007bff;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-button[type="submit"]:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-button[type="submit"]:not(:disabled):hover {
-  background-color: #0056b3;
-}
-
-p {
-  color: green;
-  font-weight: bold;
-  text-align: center;
 }
