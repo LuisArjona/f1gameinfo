@@ -1,7 +1,7 @@
 <div class="container">
     <nav class="navbar">
         <div class="navbar-logo">
-            <img src="../../../public/favicon.ico" alt="Logo F1">
+            <img src="favicon.png" alt="Logo F1">
         </div>
         <ul class="navbar-links">
             <li><a [routerLink]="['/info']" routerLinkActive="router-link-active">Info</a></li>
@@ -11,26 +11,35 @@
             <li><a [routerLink]="['/ranking']" routerLinkActive="router-link-active">Ranking</a></li>
         </ul>
     </nav>
+
     <h2>Comprar Cartas</h2>
     <div class="contador-monedas">
         <span>Monedas:</span>
         <div class="monedas">{{ monedas }}</div>
         <button class="obtener-monedas" (click)="incrementarMonedas()">+100 Monedas</button>
     </div>
+
     <div class="compras-container">
         <div class="columna">
             <h3>Pilotos</h3>
             <div class="fila" *ngFor="let fila of dividirEnFilas(pilotos, 3)">
-                <div class="carta" *ngFor="let piloto of fila">
-                    <div class="valoracion">Valoración: {{ piloto.valoracion }}</div>
-                    <img [src]="'http://localhost:8080' + piloto.rutaImagen" alt="Imagen del Piloto">
-                    <p>{{ piloto.nombre }}</p>
-                    <p><strong>Precio:</strong> {{ piloto.precio }}</p>
-                    <p><strong>Victorias:</strong> {{ piloto.victorias }}</p>
-                    <p><strong>Podios:</strong> {{ piloto.podios }}</p>
+                <div class="carta piloto" *ngFor="let piloto of fila">
+                    <div class="valoracion">
+                        {{ piloto.valoracion }}
+                    </div>
+                    <div class="imagen-carta">
+                        <img [src]="'http://localhost:8080' + piloto.rutaImagen" alt="Imagen del Piloto">
+                    </div>
+                    <div class="info-carta">
+                        <h4>{{ piloto.nombre }}</h4>
+                        <p><strong>Precio:</strong> {{ piloto.precio }} monedas</p>
+                        <p><strong>Victorias:</strong> {{ piloto.victorias }}</p>
+                        <p><strong>Podios:</strong> {{ piloto.podios }}</p>
+                    </div>
                     <button 
                         [disabled]="isPilotoDisabled(piloto)"
-                        (click)="comprarPiloto(piloto)">
+                        (click)="comprarPiloto(piloto)"
+                        class="boton-carta">
                         @if(isPilotoComprado(piloto)){
                             Comprado
                         }
@@ -41,17 +50,23 @@
                 </div>
             </div>
         </div>
+
         <div class="columna">
             <h3>Circuitos</h3>
             <div class="fila" *ngFor="let fila of dividirEnFilas(circuitos, 3)">
-                <div class="carta" *ngFor="let circuito of fila">
-                    <img [src]="'http://localhost:8080' + circuito.rutaImagen" alt="Imagen del Circuito">
-                    <p>{{ circuito.nombre }}</p>
-                    <p><strong>País:</strong> {{ circuito.pais }}</p>
-                    <p><strong>Precio:</strong> {{ circuito.precio }}</p>
+                <div class="carta circuito" *ngFor="let circuito of fila">
+                    <div class="imagen-carta">
+                        <img [src]="'http://localhost:8080' + circuito.rutaImagen" alt="Imagen del Circuito">
+                    </div>
+                    <div class="info-carta">
+                        <h4>{{ circuito.nombre }}</h4>
+                        <p><strong>País:</strong> {{ circuito.pais }}</p>
+                        <p><strong>Precio:</strong> {{ circuito.precio }} monedas</p>
+                    </div>
                     <button 
                         [disabled]="isCircuitoDisabled(circuito)"
-                        (click)="comprarCircuito(circuito)">
+                        (click)="comprarCircuito(circuito)"
+                        class="boton-carta">
                         @if(isCircuitoComprado(circuito)){
                             Comprado
                         }
