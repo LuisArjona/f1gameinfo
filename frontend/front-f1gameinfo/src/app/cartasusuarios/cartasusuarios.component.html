@@ -1,0 +1,26 @@
+<div class="container">
+    <nav class="navbar">
+        <div class="navbar-logo">
+            <img src="http://localhost:3000/images/logos/logoselected.webp" alt="Logo F1">
+        </div>
+        <ul class="navbar-links">
+            <li><a [routerLink]="['/info']" routerLinkActive="router-link-active">Info</a></li>
+            <li><a [routerLink]="['/comprarcartas']" routerLinkActive="router-link-active">Juego de Cartas</a></li>
+            <li><a [routerLink]="['/crearcarta']" routerLinkActive="router-link-active">Crea tu Carta</a></li>
+            <li><a [routerLink]="['/cartasusuarios']" routerLinkActive="router-link-active">Cartas de Otros Usuarios</a></li>
+            <li><a [routerLink]="['/ranking']" routerLinkActive="router-link-active">Ranking</a></li>
+        </ul>
+    </nav>
+
+    <h2>Cartas de Usuarios</h2>
+    <div class="cartas-container">
+        <div class="fila" *ngFor="let fila of dividirEnFilas(cartas, 3)">
+            <div class="carta" *ngFor="let carta of fila">
+                <div class="valoracion">Valoración: {{ carta.valoracion }}</div>
+                <img [src]="'http://localhost:8080' + carta.rutaImagen" alt="Imagen de la Carta">
+                <p>{{ carta.username.split('@')[0] }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -135,7 +135,8 @@ export class CartaService {
     formData.append('valoracion', valoracion.toString());
     formData.append('imagen', imagen);
 
-    return this.http.post(`http://localhost:8080/cartas/uploads/${id}`, formData, { headers });
+    return this.http.post(`http://localhost:8080/cartas/uploads/${id}`, formData, { headers,
+      responseType: 'text' as 'json' });
   }
 
   getRanking(): Observable<any> {

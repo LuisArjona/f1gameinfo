@@ -1,0 +1,39 @@
+<div class="container">
+    <nav class="navbar">
+        <div class="navbar-logo">
+            <img src="http://localhost:3000/images/logos/logoselected.webp" alt="Logo F1">
+        </div>
+        <ul class="navbar-links">
+            <li><a [routerLink]="['/info']" routerLinkActive="router-link-active">Info</a></li>
+            <li><a [routerLink]="['/comprarcartas']" routerLinkActive="router-link-active">Juego de Cartas</a></li>
+            <li><a [routerLink]="['/crearcarta']" routerLinkActive="router-link-active">Crea tu Carta</a></li>
+            <li><a [routerLink]="['/cartasusuarios']" routerLinkActive="router-link-active">Cartas de Otros Usuarios</a></li>
+            <li><a [routerLink]="['/ranking']" routerLinkActive="router-link-active">Ranking</a></li>
+        </ul>
+    </nav>
+
+    <h2>Crear Tu Carta</h2>
+    <div *ngIf="cartaCreada; else crearCartaForm">
+        <div class="carta-creada">
+            <div class="valoracion">Valoración: {{ cartaCreada.valoracion }}</div>
+            <img [src]="'http://localhost:8080' + cartaCreada.rutaImagen" alt="Imagen de la Carta">
+            <p>{{ cartaCreada.username.split('@')[0] }}</p>
+        </div>
+    </div>
+
+    <ng-template #crearCartaForm>
+        <form (ngSubmit)="subirCarta()" class="crear-carta-form">
+            <label>
+                Valoración:
+                <input type="number" [(ngModel)]="valoracion" name="valoracion" required min="1" max="99">
+            </label>
+
+            <label>
+                Imagen:
+                <input type="file" (change)="onFileSelected($event)" required>
+            </label>
+
+            <button type="submit">Crear Carta</button>
+        </form>
+    </ng-template>
+</div>

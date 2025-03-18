@@ -25,7 +25,7 @@ export class LoguearComponent {
         if (token) {
           localStorage.setItem("token", JSON.stringify(token));
           this.exito = true;
-          this.router.navigate(["/dashboard"]);
+          this.router.navigate(["/info"]);
         }
       },
       error: (error) => {
