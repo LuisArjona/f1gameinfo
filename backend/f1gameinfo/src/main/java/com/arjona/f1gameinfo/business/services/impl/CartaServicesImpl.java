@@ -51,9 +51,6 @@ public class CartaServicesImpl implements CartaServices{
 		Usuario usuario = usuarioRepository.findById(id).get();
 		usuario.setMonedas(monedas);
 		
-		if(idPiloto == null && idCircuito == null)
-			throw new IllegalStateException("No hay piloto o circuito que actualizar.");
-		
 		if(idPiloto != null) {
 			if(! pilotoRepository.existsById(idPiloto))
 				throw new IllegalStateException("Piloto no existente.");

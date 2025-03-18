@@ -6,6 +6,8 @@ import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
 import com.arjona.f1gameinfo.business.model.Circuito;
 import com.arjona.f1gameinfo.business.model.Piloto;
 import com.arjona.f1gameinfo.business.model.UsuarioDTO;
@@ -15,7 +17,9 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 	
 	Optional<Usuario> findByUsername(String username);
 	boolean existsByUsername(String username);
-	Integer findMonedasById(Long id);
+	@Query("SELECT u.monedas FROM Usuario u WHERE u.id = :id")
+	Integer findMonedasById(@Param("id") Long id);
+
 	
 	@Query("SELECT new com.arjona.f1gameinfo.business.model.UsuarioDTO("
             + "u.username, "
@@ -26,8 +30,12 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
             + "ORDER BY SIZE(u.pilotos) + SIZE(u.circuitos) DESC")
 	List<UsuarioDTO> getAllUsuariosRanking();
 	
-    Set<Piloto> findPilotosById(Long id);
+	@Query("SELECT u.pilotos FROM Usuario u WHERE u.id = :id")
+	Set<Piloto> findPilotosById(@Param("id") Long id);
+
     
-    Set<Circuito> findCircuitosById(Long id);
+	@Query("SELECT u.circuitos FROM Usuario u WHERE u.id = :id")
+	Set<Circuito> findCircuitosById(@Param("id") Long id);
+
 
 }
