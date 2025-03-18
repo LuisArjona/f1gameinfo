@@ -78,26 +78,47 @@ public class CartaServicesImpl implements CartaServices{
 
 	@Override
 	public void subirCarta(Long id, Integer valoracion, MultipartFile imagen) {
-		if(! usuarioRepository.existsById(id))
-			throw new IllegalStateException("Usuario no existente.");
-		
-		Usuario usuario = usuarioRepository.findById(id).get();
-		
-		String rutaImg = "uploads/images/" + imagen.getOriginalFilename();
-		File file = new File(rutaImg);
-		
-		try {
-			imagen.transferTo(file);
-		} catch (IOException e) {
-			throw new IllegalStateException("Error con la imagen.");
-		}
-		
-		CartaUsuario carta = new CartaUsuario();
-		carta.setUsuario(usuario);
-		carta.setValoracion(valoracion);
-		carta.setRutaImagen("/uploads/images/" + imagen.getOriginalFilename());
-		
-		cartaUsuarioRepository.save(carta);
+	    if (!usuarioRepository.existsById(id)) {
+	        throw new IllegalStateException("Usuario no existente.");
+	    }
+	    if (valoracion > 99 || valoracion < 1) {
+	        throw new IllegalStateException("La valoración debe estar entre 1 y 99.");
+	    }
+
+	    Usuario usuario = usuarioRepository.findById(id).get();
+
+	    String rutaBase = System.getProperty("user.dir");
+	    String nombreArchivo = imagen.getOriginalFilename();
+
+	    if (nombreArchivo == null || nombreArchivo.trim().isEmpty()) {
+	        throw new IllegalStateException("El archivo no tiene un nombre válido.");
+	    }
+
+	    String extension = "";
+	    int index = nombreArchivo.lastIndexOf('.');
+	    if (index > 0) {
+	        extension = nombreArchivo.substring(index);
+
+	    String nuevoNombreArchivo = id + "-" + String.format("%06d", (int) (Math.random() * 1000000)) + extension;
+	    File file = new File(rutaBase + "/uploads/images/" + nuevoNombreArchivo);
+
+	    while (file.exists()) {
+	        nuevoNombreArchivo = id + "-" + String.format("%06d", (int) (Math.random() * 1000000)) + extension;
+	        file = new File(rutaBase + "/uploads/images/" + nuevoNombreArchivo);
+	    }
+
+	    try {
+	        imagen.transferTo(file);
+	    } catch (IOException e) {
+	        throw new IllegalStateException("Error con la imagen: " + e.getMessage());
+	    }
+
+	    CartaUsuario carta = new CartaUsuario();
+	    carta.setUsuario(usuario);
+	    carta.setValoracion(valoracion);
+	    carta.setRutaImagen("/uploads/images/" + nuevoNombreArchivo);
+	    cartaUsuarioRepository.save(carta);
+	    }
 	}
 
 	@Override
