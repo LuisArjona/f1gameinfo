@@ -1,1 +1,66 @@
-<p>comprarcartas works!</p>
+<div class="container">
+    <nav class="navbar">
+        <div class="navbar-logo">
+            <img src="../../../public/favicon.ico" alt="Logo F1">
+        </div>
+        <ul class="navbar-links">
+            <li><a [routerLink]="['/info']" routerLinkActive="router-link-active">Info</a></li>
+            <li><a [routerLink]="['/comprarcartas']" routerLinkActive="router-link-active">Juego de Cartas</a></li>
+            <li><a [routerLink]="['/crearcarta']" routerLinkActive="router-link-active">Crea tu Carta</a></li>
+            <li><a [routerLink]="['/cartasusuarios']" routerLinkActive="router-link-active">Cartas de Otros Usuarios</a></li>
+            <li><a [routerLink]="['/ranking']" routerLinkActive="router-link-active">Ranking</a></li>
+        </ul>
+    </nav>
+    <h2>Comprar Cartas</h2>
+    <div class="contador-monedas">
+        <span>Monedas:</span>
+        <div class="monedas">{{ monedas }}</div>
+        <button class="obtener-monedas" (click)="incrementarMonedas()">+100 Monedas</button>
+    </div>
+    <div class="compras-container">
+        <div class="columna">
+            <h3>Pilotos</h3>
+            <div class="fila" *ngFor="let fila of dividirEnFilas(pilotos, 3)">
+                <div class="carta" *ngFor="let piloto of fila">
+                    <div class="valoracion">Valoración: {{ piloto.valoracion }}</div>
+                    <img [src]="'http://localhost:8080' + piloto.rutaImagen" alt="Imagen del Piloto">
+                    <p>{{ piloto.nombre }}</p>
+                    <p><strong>Precio:</strong> {{ piloto.precio }}</p>
+                    <p><strong>Victorias:</strong> {{ piloto.victorias }}</p>
+                    <p><strong>Podios:</strong> {{ piloto.podios }}</p>
+                    <button 
+                        [disabled]="isPilotoDisabled(piloto)"
+                        (click)="comprarPiloto(piloto)">
+                        @if(isPilotoComprado(piloto)){
+                            Comprado
+                        }
+                        @else{
+                            Comprar
+                        }
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="columna">
+            <h3>Circuitos</h3>
+            <div class="fila" *ngFor="let fila of dividirEnFilas(circuitos, 3)">
+                <div class="carta" *ngFor="let circuito of fila">
+                    <img [src]="'http://localhost:8080' + circuito.rutaImagen" alt="Imagen del Circuito">
+                    <p>{{ circuito.nombre }}</p>
+                    <p><strong>País:</strong> {{ circuito.pais }}</p>
+                    <p><strong>Precio:</strong> {{ circuito.precio }}</p>
+                    <button 
+                        [disabled]="isCircuitoDisabled(circuito)"
+                        (click)="comprarCircuito(circuito)">
+                        @if(isCircuitoComprado(circuito)){
+                            Comprado
+                        }
+                        @else{
+                            Comprar
+                        }
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
