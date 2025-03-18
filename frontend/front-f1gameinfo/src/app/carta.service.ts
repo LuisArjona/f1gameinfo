@@ -99,9 +99,11 @@ export class CartaService {
     return this.http.get(`http://localhost:8080/cartas/usuarios/${id}`, headers);
   }
 
-  actualizarCartasUsuario(idUsuario: number, monedas: number, idPiloto?: number, idCircuito?: number): Observable<any> {
+  actualizarCartasUsuario(monedas: number, idPiloto?: number, idCircuito?: number): Observable<any> {
     const storedToken = localStorage.getItem('token');
     const token = storedToken ? JSON.parse(storedToken).token : null;
+
+    const id = this.getUserIdFromToken();
 
     const headers = new HttpHeaders({
       "Authorization": `Bearer ${token}`
@@ -118,8 +120,9 @@ export class CartaService {
       params = params.set('idCircuito', idCircuito.toString());
     }
 
-    return this.http.patch(`http://localhost:8080/cartas/${idUsuario}`, {},  { headers, params });
+    return this.http.patch(`http://localhost:8080/cartas/${id}`, {}, { headers, params, responseType: 'text' as 'json' });
   }
+
 
   subirCarta(valoracion: number, imagen: File): Observable<any> {
     const storedToken = localStorage.getItem('token');
