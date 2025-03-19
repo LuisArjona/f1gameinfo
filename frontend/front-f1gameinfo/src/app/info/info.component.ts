@@ -1,16 +1,18 @@
 import { Component } from '@angular/core';
 import { CartaService } from '../carta.service';
 import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-info',
-  imports: [RouterModule],
+  imports: [RouterModule, CommonModule],
   templateUrl: './info.component.html',
   styleUrl: './info.component.css'
 })
 export class InfoComponent {
   pilotos: any[] = [];
   circuitos: any[] = [];
+  menuActivo: boolean = false;
 
   constructor(private cartaService: CartaService) {}
 
@@ -33,5 +35,9 @@ export class InfoComponent {
 
   ordenarPorAnhoConstruccion() {
     this.circuitos.sort((a, b) => a.anhoConstruccion - b.anhoConstruccion);
+  }
+
+  activarMenu() {
+    this.menuActivo = !this.menuActivo;
   }
 }

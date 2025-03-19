@@ -3,9 +3,9 @@
     font-family: Arial, sans-serif;
     background-color: #ffffff;
     color: #000000;
-}
-
-.navbar {
+  }
+  
+  .navbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -14,43 +14,59 @@
     color: #ffffff;
     border-radius: 5px;
     margin-bottom: 20px;
-}
-
-.navbar-logo img {
+    flex-wrap: wrap;
+    position: relative;
+  }
+  
+  .navbar-logo img {
     width: 50px;
     height: auto;
-}
-
-.navbar-links {
+  }
+  
+  .navbar-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .navbar-links {
     list-style: none;
     display: flex;
     gap: 15px;
     margin: 0;
     padding: 0;
-}
-
-.navbar-links li {
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+  }
+  
+  .navbar-links.active {
+    max-height: 300px;
+    opacity: 1;
+  }
+  
+  .navbar-links li {
     margin: 0;
-}
-
-.navbar-links a {
+  }
+  
+  .navbar-links a {
     text-decoration: none;
     color: #ffffff;
     font-size: 16px;
     font-weight: bold;
     transition: color 0.3s ease, transform 0.2s ease;
-}
-
-.navbar-links a:hover {
+  }
+  
+  .navbar-links a:hover {
     color: #f0c14b;
-    transform: scale(1.1);
-}
-
-.navbar-links .router-link-active {
+    transform: scale(1.05);
+  }
+  
+  .navbar-links .router-link-active {
     text-decoration: underline;
     color: #f0c14b;
-}
-
+  }
 .compras-container {
     display: flex;
     justify-content: space-between;
@@ -208,3 +224,51 @@
     background-color: #8f0f14;
     transform: scale(0.95);
 }
+
+@media (max-width: 768px) {
+    .navbar {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .navbar-toggle {
+      display: block;
+    }
+  
+    .navbar-links {
+      flex-direction: column;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      gap: 10px;
+      width: 100%;
+    }
+  
+    .navbar-links.active {
+      opacity: 1;
+      max-height: 300px;
+    }
+  
+    .navbar-links a {
+      font-size: 14px;
+      padding: 5px 0;
+      display: block;
+      width: 100%;
+      text-align: left;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .navbar-logo img {
+      width: 40px;
+    }
+  
+    .navbar-links a {
+      font-size: 12px;
+      padding: 4px 0;
+    }
+  
+    .navbar {
+      padding: 10px;
+    }
+  }

@@ -15,6 +15,7 @@ export class ComprarcartasComponent {
   pilotosUsu: any[] = [];
   circuitosUsu: any[] = [];
   monedas: number = 0;
+  menuActivo: boolean = false;
 
   constructor(private cartaService: CartaService) {}
 
@@ -83,6 +84,10 @@ export class ComprarcartasComponent {
     this.cartaService.actualizarCartasUsuario(this.monedas + 100).subscribe(() => {
         this.monedas += 100;
     });
+  }
+
+  activarMenu() {
+    this.menuActivo = !this.menuActivo;
   }
   
 }

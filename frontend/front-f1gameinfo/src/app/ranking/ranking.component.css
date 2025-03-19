@@ -3,9 +3,9 @@
     font-family: Arial, sans-serif;
     background-color: #ffffff;
     color: #000000;
-}
-
-.navbar {
+  }
+  
+  .navbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -14,61 +14,78 @@
     color: #ffffff;
     border-radius: 5px;
     margin-bottom: 20px;
-}
-
-.navbar-logo img {
+    flex-wrap: wrap;
+    position: relative;
+  }
+  
+  .navbar-logo img {
     width: 50px;
     height: auto;
-}
-
-.navbar-links {
+  }
+  
+  .navbar-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .navbar-links {
     list-style: none;
     display: flex;
     gap: 15px;
     margin: 0;
     padding: 0;
-}
-
-.navbar-links li {
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+  }
+  
+  .navbar-links.active {
+    max-height: 300px;
+    opacity: 1;
+  }
+  
+  .navbar-links li {
     margin: 0;
-}
-
-.navbar-links a {
+  }
+  
+  .navbar-links a {
     text-decoration: none;
     color: #ffffff;
     font-size: 16px;
     font-weight: bold;
     transition: color 0.3s ease, transform 0.2s ease;
-}
-
-.navbar-links a:hover {
+  }
+  
+  .navbar-links a:hover {
     color: #f0c14b;
-    transform: scale(1.1);
-}
-
-.navbar-links .router-link-active {
+    transform: scale(1.05);
+  }
+  
+  .navbar-links .router-link-active {
     text-decoration: underline;
     color: #f0c14b;
-}
-
-.ranking-container {
+  }
+  
+  .ranking-container {
     margin-top: 20px;
     text-align: center;
-}
-
-.ranking-container h2 {
+  }
+  
+  .ranking-container h2 {
     color: #d71920;
     margin-bottom: 20px;
-}
-
-.ranking-list {
+  }
+  
+  .ranking-list {
     display: flex;
     flex-direction: column;
     gap: 15px;
     align-items: center;
-}
-
-.ranking-item {
+  }
+  
+  .ranking-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -79,58 +96,58 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-left: 5px solid #d71920;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.ranking-item:hover {
+  }
+  
+  .ranking-item:hover {
     transform: scale(1.05);
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
-}
-
-.ranking-position {
+  }
+  
+  .ranking-position {
     font-size: 24px;
     font-weight: bold;
     margin-right: 15px;
-}
-
-.ranking-position.gold {
+  }
+  
+  .ranking-position.gold {
     color: #FFD700;
-}
-
-.ranking-position.silver {
+  }
+  
+  .ranking-position.silver {
     color: #C0C0C0;
-}
-
-.ranking-position.bronze {
+  }
+  
+  .ranking-position.bronze {
     color: #CD7F32;
-}
-
-.ranking-info {
+  }
+  
+  .ranking-info {
     flex: 1;
     text-align: left;
-}
-
-.username {
+  }
+  
+  .username {
     font-weight: bold;
     font-size: 18px;
     color: #000000;
     margin-right: 10px;
-}
-
-.detalles {
+  }
+  
+  .detalles {
     font-size: 14px;
     color: #555555;
     display: flex;
     gap: 20px;
-}
-
-.filtros {
+  }
+  
+  .filtros {
     display: flex;
     gap: 15px;
     justify-content: center;
     margin-bottom: 20px;
-}
-
-.filtros button {
+  }
+  
+  .filtros button {
     padding: 10px 15px;
     background-color: #d71920;
     color: #ffffff;
@@ -140,14 +157,63 @@
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.filtros button:hover {
+  }
+  
+  .filtros button:hover {
     background-color: #b7151a;
     transform: scale(1.05);
-}
-
-.filtros button:active {
+  }
+  
+  .filtros button:active {
     background-color: #8f0f14;
     transform: scale(0.95);
-}
+  }
+  
+  @media (max-width: 768px) {
+    .navbar {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .navbar-toggle {
+      display: block;
+    }
+  
+    .navbar-links {
+      flex-direction: column;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      gap: 10px;
+      width: 100%;
+    }
+  
+    .navbar-links.active {
+      opacity: 1;
+      max-height: 300px;
+    }
+  
+    .navbar-links a {
+      font-size: 14px;
+      padding: 5px 0;
+      display: block;
+      width: 100%;
+      text-align: left;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .navbar-logo img {
+      width: 40px;
+    }
+  
+    .navbar-links a {
+      font-size: 12px;
+      padding: 4px 0;
+    }
+  
+    .navbar {
+      padding: 10px;
+    }
+  }
+  

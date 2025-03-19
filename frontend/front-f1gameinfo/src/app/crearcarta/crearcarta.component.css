@@ -14,11 +14,22 @@
     color: #ffffff;
     border-radius: 5px;
     margin-bottom: 20px;
+    flex-wrap: wrap;
+    position: relative;
 }
 
 .navbar-logo img {
     width: 50px;
     height: auto;
+}
+
+.navbar-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 24px;
+    cursor: pointer;
 }
 
 .navbar-links {
@@ -27,6 +38,12 @@
     gap: 15px;
     margin: 0;
     padding: 0;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.navbar-links.active {
+    max-height: 300px;
+    opacity: 1;
 }
 
 .navbar-links li {
@@ -55,41 +72,71 @@ h2 {
     color: #d71920;
     margin-bottom: 20px;
     text-align: center;
+    font-size: 28px;
+    font-family: 'Roboto', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
 }
 
 .crear-carta-form, .carta-creada {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
     align-items: center;
-    max-width: 400px; /* Limitar ancho */
-    margin: 0 auto; /* Centrar en el contenedor */
-    padding: 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #d71920;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 25px;
+    background-color: #ffffff;
+    border: 2px solid #d71920;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.crear-carta-form:hover, .carta-creada:hover {
+    transform: scale(1.02);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
 }
 
 .crear-carta-form label {
     width: 100%;
     text-align: left;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    color: #333333;
 }
 
 .crear-carta-form input {
     width: 100%;
-    padding: 10px;
+    max-width: 100%; /* Asegura que no sobresalgan del contenedor */
+    box-sizing: border-box; /* Incluye padding y bordes dentro del ancho total */
+    padding: 12px;
     margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border: 2px solid #d71920;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    transition: border-color 0.3s ease;
+}
+
+
+.crear-carta-form input:focus {
+    border-color: #b7151a;
+    outline: none;
+    box-shadow: 0 0 5px rgba(215, 25, 32, 0.5);
 }
 
 .crear-carta-form button {
-    padding: 10px 20px;
+    width: 100%;
+    padding: 12px;
     background-color: #d71920;
     color: #ffffff;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
@@ -97,26 +144,29 @@ h2 {
 .crear-carta-form button:hover {
     background-color: #b7151a;
     transform: scale(1.05);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .carta-creada {
     text-align: center;
     max-width: 400px;
     margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
+    padding: 25px;
+    background-color: #ffffff;
     border: 2px solid #d71920;
     border-radius: 12px;
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .carta-creada img {
     max-width: 100%;
     height: auto;
-    border-radius: 8px;
-    margin-bottom: 15px;
+    border-radius: 12px;
+    margin-bottom: 20px;
     object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .carta-creada .valoracion {
@@ -125,17 +175,78 @@ h2 {
     right: 10px;
     background-color: #d71920;
     color: #ffffff;
-    font-size: 18px;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
     font-weight: bold;
-    padding: 5px 10px;
-    border-radius: 5px;
+    padding: 6px 12px;
+    border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .carta-creada p {
-    margin: 10px 0;
+    margin: 15px 0 0;
     font-size: 18px;
+    font-family: 'Poppins', sans-serif;
     font-weight: bold;
     text-transform: uppercase;
     color: #333333;
+    letter-spacing: 1px;
 }
+
+@media (max-width: 768px) {
+    .crear-carta-form, .carta-creada {
+        max-width: 100%;
+        padding: 20px;
+    }
+
+    .carta-creada img {
+        max-width: 100%;
+    }
+
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar-toggle {
+        display: block;
+    }
+
+    .navbar-links {
+        flex-direction: column;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .navbar-links.active {
+        opacity: 1;
+        max-height: 300px;
+    }
+
+    .navbar-links a {
+        font-size: 14px;
+        padding: 5px 0;
+        display: block;
+        width: 100%;
+        text-align: left;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar-logo img {
+        width: 40px;
+    }
+
+    .navbar-links a {
+        font-size: 12px;
+        padding: 4px 0;
+    }
+
+    .navbar {
+        padding: 10px;
+    }
+}
+

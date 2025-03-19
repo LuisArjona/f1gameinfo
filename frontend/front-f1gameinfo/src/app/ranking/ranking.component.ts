@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 export class RankingComponent {
   ranking: any[] = [];
   originalRanking: any[] = [];
+  menuActivo: boolean = false;
 
   constructor(private cartaService: CartaService) {}
 
@@ -33,4 +34,9 @@ export class RankingComponent {
   ordenarPorCircuitos() {
     this.ranking.sort((a, b) => b.cantidadCircuitos - a.cantidadCircuitos);
   }
+
+  activarMenu() {
+    this.menuActivo = !this.menuActivo;
+  }
+  
 }

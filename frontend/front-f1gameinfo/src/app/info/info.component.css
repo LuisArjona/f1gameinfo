@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;500&display=swap');
+
 .container {
     padding: 20px;
     font-family: Arial, sans-serif;
@@ -14,11 +16,22 @@
     color: #ffffff;
     border-radius: 5px;
     margin-bottom: 20px;
+    flex-wrap: wrap;
+    position: relative;
 }
 
 .navbar-logo img {
     width: 50px;
     height: auto;
+}
+
+.navbar-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 24px;
+    cursor: pointer;
 }
 
 .navbar-links {
@@ -27,6 +40,12 @@
     gap: 15px;
     margin: 0;
     padding: 0;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.navbar-links.active {
+    max-height: 300px;
+    opacity: 1;
 }
 
 .navbar-links li {
@@ -55,59 +74,117 @@
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
+    flex-wrap: wrap;
 }
 
 .section {
     width: 45%;
+    margin-bottom: 20px;
 }
 
 .section h2 {
+    font-family: 'Roboto', Arial, sans-serif;
+    font-size: 24px;
+    font-weight: bold;
     color: #d71920;
+    margin-bottom: 20px;
+    text-align: center;
     border-bottom: 2px solid #d71920;
     padding-bottom: 10px;
 }
 
 .item-card {
-    border: 1px solid #d71920;
-    border-radius: 8px;
-    padding: 10px;
+    font-family: 'Poppins', Arial, sans-serif;
+    border: 3px solid #d71920;
+    border-radius: 15px;
+    padding: 20px;
     margin-bottom: 20px;
-    background-color: #f9f9f9;
+    background: linear-gradient(to bottom, #ffffff, #f4f4f4);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    height: 600px;
+    height: 500px;
     box-sizing: border-box;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.item-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
+    border-color: #f0c14b;
+    background: linear-gradient(to bottom, #ffffff, #eaeaea);
 }
 
 .item-card img {
-    width: 100%;
+    width: 90%;
     height: auto;
-    max-height: 60%;
-    border-radius: 8px;
+    max-height: 50%;
+    border-radius: 12px;
     object-fit: cover;
     object-position: top;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.item-card img.circuito {
-    object-fit: contain;
-    object-position: center;
+.item-card img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+.item-card .card-header {
+    font-family: 'Roboto', Arial, sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: #d71920;
+    margin-bottom: 10px;
+    text-align: center;
 }
 
 .item-card p {
-    margin: 5px 0;
-    text-align: center;
-    font-size: 14px;
+    font-family: 'Poppins', Arial, sans-serif;
+    margin: 8px 0;
+    text-align: left;
+    font-size: 15px;
+    color: #333333;
+    line-height: 1.5;
+    width: 90%;
 }
 
 .item-card p strong {
+    font-family: 'Roboto', Arial, sans-serif;
     color: #d71920;
+    font-size: 16px;
 }
 
-.item-card p:last-child {
-    margin-top: auto;
+.item-card .stats {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.item-card .stats div {
+    font-family: 'Roboto', Arial, sans-serif;
+    flex: 1;
+    text-align: center;
+    font-size: 14px;
+    color: #333333;
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.item-card .stats div:hover {
+    background: #ffe0b2;
+    transform: scale(1.05);
 }
 
 .filters {
@@ -118,12 +195,12 @@
 }
 
 .filters button {
-    padding: 10px 15px;
+    padding: 12px 18px;
     background-color: #d71920;
     color: #ffffff;
     border: none;
-    border-radius: 5px;
-    font-size: 14px;
+    border-radius: 8px;
+    font-size: 16px;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
@@ -131,10 +208,147 @@
 
 .filters button:hover {
     background-color: #b7151a;
-    transform: scale(1.05);
+    transform: scale(1.1);
 }
 
 .filters button:active {
     background-color: #8f0f14;
     transform: scale(0.95);
+}
+
+/* Responsividad */
+@media (max-width: 1024px) {
+    .section {
+        width: 100%;
+    }
+
+    .item-card {
+        height: auto;
+        padding: 15px;
+    }
+
+    .item-card img {
+        max-height: 40%;
+    }
+
+    .item-card .stats {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .item-card .stats div {
+        padding: 8px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    
+      .navbar-toggle {
+        display: block;
+      }
+    
+      .navbar-links {
+        flex-direction: column;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        gap: 10px;
+        width: 100%;
+      }
+    
+      .navbar-links.active {
+        opacity: 1;
+        max-height: 300px;
+      }
+    
+      .navbar-links a {
+        font-size: 14px;
+        padding: 5px 0;
+        display: block;
+        width: 100%;
+        text-align: left;
+      }
+      
+    .items-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .item-card {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .item-card img {
+        max-height: 30%;
+    }
+
+    .item-card .card-header {
+        font-size: 20px;
+    }
+
+    .item-card p {
+        font-size: 14px;
+    }
+
+    .item-card .stats div {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .item-card img {
+        max-height: 25%;
+    }
+
+    .item-card .card-header {
+        font-size: 18px;
+    }
+
+    .item-card p {
+        font-size: 12px;
+    }
+
+    .item-card .stats div {
+        font-size: 10px;
+    }
+
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar-toggle {
+        display: block;
+    }
+
+    .navbar-links {
+        flex-direction: column;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .navbar-links.active {
+        opacity: 1;
+        max-height: 300px;
+    }
+
+    .navbar-links a {
+        font-size: 14px;
+        padding: 5px 0;
+        display: block;
+        width: 100%;
+        text-align: left;
+    }
+
+    .navbar-logo img {
+        width: 40px;
+    }
 }

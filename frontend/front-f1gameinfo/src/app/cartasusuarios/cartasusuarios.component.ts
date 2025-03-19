@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 })
 export class CartasusuariosComponent {
   cartas: any[] = [];
+  menuActivo: boolean = false;
 
   constructor(private cartaService: CartaService) {}
 
@@ -26,6 +27,10 @@ export class CartasusuariosComponent {
       filas.push(array.slice(i, i + tamanoFila));
     }
     return filas;
+  }
+
+  activarMenu() {
+    this.menuActivo = !this.menuActivo;
   }
 
 }

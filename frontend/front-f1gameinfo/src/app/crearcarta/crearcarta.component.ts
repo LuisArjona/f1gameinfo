@@ -4,6 +4,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { RouterModule } from '@angular/router'; 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-crearcarta',
@@ -15,6 +16,7 @@ export class CrearcartaComponent implements OnInit {
   cartaCreada: any = null;
   valoracion: number = 0;
   imagen: File | null = null;
+  menuActivo: boolean = false;
 
   constructor(private cartaService: CartaService) {}
 
@@ -43,17 +45,20 @@ export class CrearcartaComponent implements OnInit {
     if (this.imagen) {
       this.cartaService.subirCarta(this.valoracion, this.imagen).subscribe({
         next: (data: string) => {
-          alert(data);
+          Swal.fire({title: "Felicidades", text: "Has creado tu carta", icon: "success"});
           this.ngOnInit();
         },
         error: (error) => {
-          alert('Error al crear la carta.');
+          Swal.fire({title: "Ups", text: "Algo ha salido mal", icon: "error"});
         }
       });
     } else {
-      alert('Por favor, selecciona una imagen.');
+      Swal.fire({title: "Ups", text: "No has seleccionado una imagen...", icon: "error"});
     }
   }
   
+  activarMenu() {
+    this.menuActivo = !this.menuActivo;
+  }
   
 }

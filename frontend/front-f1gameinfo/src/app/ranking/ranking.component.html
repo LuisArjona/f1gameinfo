@@ -1,40 +1,42 @@
 <div class="container">
-    <nav class="navbar">
-      <div class="navbar-logo">
-        <img src="favicon.png" alt="Logo F1">
+  <nav class="navbar">
+    <div class="navbar-logo">
+      <img src="favicon.png" alt="Logo F1">
+    </div>
+    <button class="navbar-toggle" (click)="activarMenu()">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+    <ul class="navbar-links" [ngClass]="{'active': menuActivo}">
+      <li><a [routerLink]="['/info']" routerLinkActive="router-link-active">Info</a></li>
+      <li><a [routerLink]="['/comprarcartas']" routerLinkActive="router-link-active">Juego de Cartas</a></li>
+      <li><a [routerLink]="['/crearcarta']" routerLinkActive="router-link-active">Crea tu Carta</a></li>
+      <li><a [routerLink]="['/cartasusuarios']" routerLinkActive="router-link-active">Cartas de Otros Usuarios</a></li>
+      <li><a [routerLink]="['/ranking']" routerLinkActive="router-link-active">Ranking</a></li>
+    </ul>
+  </nav>
+  <div class="ranking-container">
+    <h2>Ranking de Usuarios</h2>
+    <div class="filtros">
+      <button (click)="ordenarPorTotal()">Ordenar por Total</button>
+      <button (click)="ordenarPorPilotos()">Ordenar por Pilotos</button>
+      <button (click)="ordenarPorCircuitos()">Ordenar por Circuitos</button>
+    </div>
+    <div class="ranking-list">
+      @for(user of ranking; track user.username) {
+      <div class="ranking-item">
+        <div 
+          class="ranking-position"
+          [ngClass]="{'gold': ranking.indexOf(user) === 0,
+            'silver': ranking.indexOf(user) === 1,
+            'bronze': ranking.indexOf(user) === 2}">
+          #{{ ranking.indexOf(user) + 1 }}
+        </div>
+        <div class="ranking-info">
+          <span class="username">{{ user.username.split('@')[0] }}</span>
+          <span class="detalles">Pilotos: {{ user.cantidadPilotos }} | Circuitos: {{ user.cantidadCircuitos }} | Total: {{ user.cantidadTotal }}</span>
+        </div>
       </div>
-      <ul class="navbar-links">
-        <li><a [routerLink]="['/info']" routerLinkActive="router-link-active">Info</a></li>
-        <li><a [routerLink]="['/comprarcartas']" routerLinkActive="router-link-active">Juego de Cartas</a></li>
-        <li><a [routerLink]="['/crearcarta']" routerLinkActive="router-link-active">Crea tu Carta</a></li>
-        <li><a [routerLink]="['/cartasusuarios']" routerLinkActive="router-link-active">Cartas de Otros Usuarios</a></li>
-        <li><a [routerLink]="['/ranking']" routerLinkActive="router-link-active">Ranking</a></li>
-      </ul>
-    </nav>
-    <div class="ranking-container">
-      <h2>Ranking de Usuarios</h2>
-      <div class="filtros">
-        <button (click)="ordenarPorTotal()">Ordenar por Total</button>
-        <button (click)="ordenarPorPilotos()">Ordenar por Pilotos</button>
-        <button (click)="ordenarPorCircuitos()">Ordenar por Circuitos</button>
-      </div>
-      <div class="ranking-list">
-        @for(user of ranking; track user.username){
-          <div class="ranking-item">
-            <div 
-              class="ranking-position"
-              [ngClass]="{'gold': ranking.indexOf(user) === 0,
-                'silver': ranking.indexOf(user) === 1,
-                'bronze': ranking.indexOf(user) === 2}">
-              #{{ ranking.indexOf(user) + 1 }}
-            </div>
-            <div class="ranking-info">
-              <span class="username">{{ user.username.split('@')[0] }}</span>
-              <span class="detalles">Pilotos: {{ user.cantidadPilotos }} | Circuitos: {{ user.cantidadCircuitos }} | Total: {{ user.cantidadTotal }}</span>
-            </div>
-          </div>
-        }
-      </div>
+      }
     </div>
   </div>
-  
+</div>
