@@ -4,9 +4,7 @@
       <img src="favicon.png" alt="F1GameInfo Logo" class="logo">
       <h1 class="app-title">F1GameInfo</h1>
     </div>
-
     <h2>Registrarse</h2>
-
     <label class="register-label">
       Email:
       <input type="text" formControlName="email" placeholder="Introduce tu email" class="register-input">
@@ -19,7 +17,6 @@
         }
       }
     </label>
-
     <label class="register-label">
       Contraseña:
       <input type="password" formControlName="pass" placeholder="Escribe tu contraseña" class="register-input">
@@ -32,7 +29,6 @@
         }
       }
     </label>
-
     <label class="register-label">
       Confirmar contraseña:
       <input type="password" formControlName="confirm_pass" placeholder="Confirma tu contraseña" class="register-input">
@@ -45,11 +41,9 @@
         <small>Las contraseñas no coinciden</small>
       }
     </label>
-
     @if(!exito && intentado){
       <p class="error-message">Si tienes una cuenta ya creada dirígite al <a [routerLink]="['/login']" routerLinkActive="router-link-active">login</a>.</p>
     }
-
     <button type="submit" [disabled]="form.invalid" class="register-button">Registrarse</button>
   </form>
 </div>

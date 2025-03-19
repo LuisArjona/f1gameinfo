@@ -15,12 +15,12 @@
   height: 100%;
   background: url('../../assets/public/fondo.avif') no-repeat center center fixed;
   background-size: cover;
-  filter: blur(4px); /* Aplicar desenfoque a la imagen de fondo */
-  z-index: -1; /* Asegurar que está detrás del contenido */
+  filter: blur(4px);
+  z-index: -1;
 }
 
 .register-form {
-  z-index: 1; /* Elevar el formulario para que esté sobre el fondo */
+  z-index: 1;
   position: relative;
   background-color: #ffffff;
   padding: 2rem;
@@ -110,4 +110,34 @@ small {
   font-size: 0.9em;
   display: block;
   margin-top: 5px;
+}
+
+@media (max-width: 768px) {
+  .register-form {
+    padding: 1rem;
+    max-width: 300px;
+  }
+
+  .logo {
+    width: 80px;
+  }
+
+  .app-title {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .register-form {
+    padding: 1rem;
+    max-width: 200px;
+  }
+
+  .logo {
+    width: 60px;
+  }
+
+  .app-title {
+    font-size: 1.2rem;
+  }
 }
