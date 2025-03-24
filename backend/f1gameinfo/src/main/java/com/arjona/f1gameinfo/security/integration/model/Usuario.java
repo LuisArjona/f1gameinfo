@@ -51,16 +51,19 @@ public class Usuario {
     
     private Integer monedas;
     
+    private String secreto;
+    
 	public Usuario() {
 	}
 
-	public Usuario(Long id, String username, String password, Set<Piloto> pilotos, Set<Circuito> circuitos, Integer monedas) {
+	public Usuario(Long id, String username, String password, Set<Piloto> pilotos, Set<Circuito> circuitos, Integer monedas, String secreto) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.pilotos = pilotos;
 		this.circuitos = circuitos;
 		this.monedas = monedas;
+		this.secreto = secreto;
 		}
 
 	public Long getId() {
@@ -115,8 +118,6 @@ public class Usuario {
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-	
-	
 
 	public Integer getMonedas() {
 		return monedas;
@@ -124,6 +125,14 @@ public class Usuario {
 
 	public void setMonedas(Integer monedas) {
 		this.monedas = monedas;
+	}
+	
+	public String getSecreto() {
+		return secreto;
+	}
+
+	public void setSecreto(String secreto) {
+		this.secreto = secreto;
 	}
 
 	@Override

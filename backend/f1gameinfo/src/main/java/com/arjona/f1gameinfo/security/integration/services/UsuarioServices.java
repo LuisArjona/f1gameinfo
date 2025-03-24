@@ -4,6 +4,6 @@ import com.arjona.f1gameinfo.security.integration.model.Usuario;
 
 public interface UsuarioServices {
 	
-	Usuario registrarUsuario(String username, String password);
+	Usuario registrarUsuario(String username, String password, String key);
 
 }
