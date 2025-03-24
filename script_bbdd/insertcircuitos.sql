@@ -16,7 +16,7 @@ INSERT INTO CIRCUITOS (NOMBRE, PAIS, DESCRIPCION, ANHO_CONSTRUCCION, PRECIO, RUT
 ('Zandvoort', 'Países Bajos', 'Casi tan ratonero como Hungría, la locura por Max Verstappen aquí no tiene límites.', 1948, 3100, '/uploads/images/zandvoort.avif'),
 ('Jeddah', 'Arabia Saudita', 'Circuito urbano, rápido y peligroso, que pese a tener sus detractores, siempre ofrece un gran espectáculo.', 2021, 2500, '/uploads/images/jeddah.avif'),
 ('Miami', 'Estados Unidos', 'Parte de la ambición de la F1 de expandirse a los EEUU, pero no acaba de cuajar.', 2022, 1200, '/uploads/images/miami.avif'),
-('Las Vegas', 'Estados Unidos', 'Circuito muy difícil, que si bien es raro, propicia muchas batallas.', 2023, 95000000, '/uploads/images/vegas.avif'),
+('Las Vegas', 'Estados Unidos', 'Circuito muy difícil, que si bien es raro, propicia muchas batallas.', 2023, 1700, '/uploads/images/vegas.avif'),
 ('Circuito de Shanghai', 'China', 'Circuito muy peculiar, que carece de muchos fanáticos dentro del mundillo, pero que siempr se mantiene.', 2004, 1100, '/uploads/images/shanghai.avif'),
 ('Bakú', 'Azerbaiyán', 'Tiene la curva más difícil de todo el calendario, en la que de milagro cabe un coche, e irónicamente la recta más larga.', 2016, 2500, '/uploads/images/baku.avif'),
 ('Sakhir', 'Baréin', 'Circuito que por sus carácterísticas suele provocar que buenos coches no rinda, y malos coches sorprendan por arriba.', 2014, 3500, '/uploads/images/sakhir.avif'),

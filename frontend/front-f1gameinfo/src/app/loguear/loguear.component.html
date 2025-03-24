@@ -18,6 +18,10 @@
         </button>
       </div>
     </label>
+    <label class="login-label">
+      Código de Acceso:
+      <input type="email" [(ngModel)]="otp" name="otp" required class="login-input">
+    </label>
     <button type="submit" class="login-button">Iniciar Sesión</button>
     @if(intentado) {
       <div class="login-message">

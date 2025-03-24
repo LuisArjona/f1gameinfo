@@ -17,6 +17,7 @@ export class LoguearComponent {
   exito: boolean = false;
   intentado: boolean = false;
   showPassword: boolean = false;
+  otp: string = "";
 
 
   constructor(private usuService: UsuarioServicioService, private router: Router) {}
@@ -26,7 +27,7 @@ export class LoguearComponent {
   }
 
   loguearUsuario() {
-    this.usuService.loguearUsuarioDos(this.email, this.pass).subscribe({
+    this.usuService.loguearUsuarioDos(this.email, this.pass, this.otp).subscribe({
       next: (data) => {
         const token = data;
         if (token) {
@@ -37,7 +38,14 @@ export class LoguearComponent {
         }
       },
       error: (error) => {
-        Swal.fire({title: "Algo ha ido mal", text: "El usuario o la contraseña no son correctos", icon: "error"});
+        console.log(error.status);
+        if (error.status === 401) {
+          Swal.fire({title: "Algo ha ido mal", text: "El usuario o la contraseña no son correctos", icon: "error"});
+        } else if (error.status === 0) {
+          Swal.fire({title: "Algo ha ido mal", text: "El código OTP no es válido", icon: "error"});
+        } else {
+          Swal.fire({title: "Algo ha ido mal", text: "Ha ocurrido un error inesperado", icon: "error"});
+        }
         this.exito = false;
       }
     });
