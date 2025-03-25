@@ -109,8 +109,8 @@ h2 {
 
 .crear-carta-form input {
     width: 100%;
-    max-width: 100%; /* Asegura que no sobresalgan del contenedor */
-    box-sizing: border-box; /* Incluye padding y bordes dentro del ancho total */
+    max-width: 100%;
+    box-sizing: border-box;
     padding: 12px;
     margin-top: 5px;
     border: 2px solid #d71920;
@@ -193,6 +193,39 @@ h2 {
     letter-spacing: 1px;
 }
 
+@media (max-width: 900px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    
+      .navbar-toggle {
+        display: block;
+      }
+    
+      .navbar-links {
+        flex-direction: column;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        gap: 10px;
+        width: 100%;
+      }
+    
+      .navbar-links.active {
+        opacity: 1;
+        max-height: 300px;
+      }
+    
+      .navbar-links a {
+        font-size: 14px;
+        padding: 5px 0;
+        display: block;
+        width: 100%;
+        text-align: left;
+      }
+    }
+
 @media (max-width: 768px) {
     .crear-carta-form, .carta-creada {
         max-width: 100%;
@@ -203,36 +236,6 @@ h2 {
         max-width: 100%;
     }
 
-    .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .navbar-toggle {
-        display: block;
-    }
-
-    .navbar-links {
-        flex-direction: column;
-        max-height: 0;
-        opacity: 0;
-        overflow: hidden;
-        gap: 10px;
-        width: 100%;
-    }
-
-    .navbar-links.active {
-        opacity: 1;
-        max-height: 300px;
-    }
-
-    .navbar-links a {
-        font-size: 14px;
-        padding: 5px 0;
-        display: block;
-        width: 100%;
-        text-align: left;
-    }
 }
 
 @media (max-width: 480px) {

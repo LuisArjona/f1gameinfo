@@ -38,5 +38,9 @@ export class RankingComponent {
   activarMenu() {
     this.menuActivo = !this.menuActivo;
   }
+
+  cerrarSesion(): void {
+    localStorage.clear();
+  }
   
 }

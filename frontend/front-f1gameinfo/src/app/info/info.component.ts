@@ -40,4 +40,8 @@ export class InfoComponent {
   activarMenu() {
     this.menuActivo = !this.menuActivo;
   }
+
+  cerrarSesion(): void {
+    localStorage.clear();
+  }
 }

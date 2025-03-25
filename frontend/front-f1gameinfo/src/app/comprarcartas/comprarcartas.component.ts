@@ -89,5 +89,17 @@ export class ComprarcartasComponent {
   activarMenu() {
     this.menuActivo = !this.menuActivo;
   }
+
+  getPorcentajePilotos(): number {
+    return (this.pilotosUsu.length / this.pilotos.length) * 100;
+  }
+
+  getPorcentajeCircuitos(): number {
+    return (this.circuitosUsu.length / this.circuitos.length) * 100;
+  }
+
+  cerrarSesion(): void {
+    localStorage.clear();
+  }
   
 }

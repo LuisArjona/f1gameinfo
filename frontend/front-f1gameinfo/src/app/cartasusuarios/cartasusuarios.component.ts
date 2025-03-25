@@ -33,4 +33,8 @@ export class CartasusuariosComponent {
     this.menuActivo = !this.menuActivo;
   }
 
+  cerrarSesion(): void {
+    localStorage.clear();
+  }
+
 }

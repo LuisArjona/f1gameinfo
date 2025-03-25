@@ -60,5 +60,9 @@ export class CrearcartaComponent implements OnInit {
   activarMenu() {
     this.menuActivo = !this.menuActivo;
   }
+
+  cerrarSesion(): void {
+    localStorage.clear();
+  }
   
 }
