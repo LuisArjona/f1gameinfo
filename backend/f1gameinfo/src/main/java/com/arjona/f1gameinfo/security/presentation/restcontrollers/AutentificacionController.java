@@ -23,6 +23,11 @@ import com.arjona.f1gameinfo.security.payloads.RegisterResponse;
 import com.warrenstrange.googleauth.GoogleAuthenticatorKey;
 import com.arjona.f1gameinfo.security.payloads.JwtResponse;
 
+/**
+ * Controlador encargado de atender las
+ * peticiones acerca de la autenticación
+ * de los usuarios
+ */
 @CrossOrigin
 @RestController
 @RequestMapping("/autentificacion")
@@ -41,6 +46,13 @@ public class AutentificacionController {
 		this.utilsOTP = utilsOTP;
 	}
 
+    /**
+     * Atiende la petición de registrar un usuario
+     * nuevo en la aplicación
+     * 
+     * @param registerRequest datos para el registro
+     * @return {@code 200 OK} con {@link RegisterResponse}
+     */
 	@PostMapping("/registro")
     public ResponseEntity<?> registrarUsuario(@RequestBody RegisterRequest registerRequest){
     	
@@ -56,6 +68,15 @@ public class AutentificacionController {
     	return ResponseEntity.ok(new RegisterResponse(qr, key.getKey()));
     }
     
+	/**
+	 * Atiende la petición de logar
+	 * un usuario existente en la aplicación
+	 * 
+	 * @param username usuario
+	 * @param password contraseña
+	 * @param otp código de 2FA
+	 * @return {@code 200 OK} con {@link JwtResponse}
+	 */
     @PostMapping("/login")
     public ResponseEntity<?> logarUsuario(@RequestParam(required = true) String username,
     		@RequestParam(required = true) String password, 

@@ -1,5 +1,9 @@
 package com.arjona.f1gameinfo.security.payloads;
 
+/**
+ * POJO creado para recibir
+ * una petición de login
+ */
 public class LoginRequest {
     
     private String username;

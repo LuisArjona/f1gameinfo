@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.arjona.f1gameinfo.business.model.UsuarioDTO;
 import com.arjona.f1gameinfo.business.services.UsuarioNoAuthServices;
 
+/**
+ * Controlador encargado de atender las
+ * peticiones acerca de los usuarios
+ * fuera de la autenticación
+ */
 @CrossOrigin
 @RequestMapping("/usuarios")
 @RestController
@@ -22,11 +27,24 @@ public class UsuarioNoAuthController {
 		this.usuarioNoAuthServices = rankingServices;
 	}
 	
+	/**
+	 * Atiende la petición para obtener
+	 * el ranking de los usuarios
+	 * 
+	 * @return {@code 200 OK} con {@code List} con los usuarios
+	 */
 	@GetMapping("/ranking")
 	public List<UsuarioDTO> getRanking(){
 		return usuarioNoAuthServices.getRanking();
 	}
 	
+	/**
+	 * Atiende la petición para obtener
+	 * las monedas de un usuario
+	 * 
+	 * @param id del usuario
+	 * @return {@code 200 OK} con {@code Integer} monedas
+	 */
 	@GetMapping("/{id}/monedas")
 	public Integer getMonedasFromUsuario(@PathVariable Long id) {
 		return usuarioNoAuthServices.getMonedas(id);

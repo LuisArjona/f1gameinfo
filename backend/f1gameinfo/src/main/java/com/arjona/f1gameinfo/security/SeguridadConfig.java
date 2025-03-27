@@ -13,10 +13,22 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/**
+ * Clase de configuración para establecer que endpoints requieren
+ * autenticación y a través de que filtros
+ */
 @Configuration
 @EnableWebSecurity
 public class SeguridadConfig {
 
+	/**
+	 * Pide autenticación para todos los endpoints menos los de
+	 * autenticación e imágenes.
+	 * 
+	 * @param http
+	 * @return
+	 * @throws Exception
+	 */
 	@Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
@@ -27,6 +39,10 @@ public class SeguridadConfig {
                 .anyRequest().authenticated())
             .addFilterBefore(filtroAutentificacionJWT(), UsernamePasswordAuthenticationFilter.class)
             .addFilterBefore(filtroAutentificacionOTP(), UsernamePasswordAuthenticationFilter.class);
+        /**
+         * Todas los endpoints pasan por ambos filtros pero no requieren los de autenticación e imágenes
+         * de establecer un conexto de autenticación dentro de ellos para pasar la cadena de seguridad
+         */
 
         return http.build();
 	}

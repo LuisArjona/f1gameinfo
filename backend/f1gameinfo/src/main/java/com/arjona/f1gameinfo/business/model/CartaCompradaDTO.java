@@ -1,7 +1,10 @@
 package com.arjona.f1gameinfo.business.model;
 
 import java.util.Set;
-
+/**
+ * DTO que representa las cartas
+ * compradas de un usuario
+ */
 public class CartaCompradaDTO {
 	
 	private Set<Piloto> pilotos;

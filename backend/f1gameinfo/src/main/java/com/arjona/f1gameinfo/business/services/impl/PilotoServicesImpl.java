@@ -8,6 +8,10 @@ import com.arjona.f1gameinfo.business.model.Piloto;
 import com.arjona.f1gameinfo.business.repositores.PilotoRepository;
 import com.arjona.f1gameinfo.business.services.PilotoServices;
 
+/**
+ * Servicio que gestiona la lógica
+ * de la aplicación sobre los pilotos
+ */
 @Service
 public class PilotoServicesImpl implements PilotoServices{
 	
@@ -21,5 +25,4 @@ public class PilotoServicesImpl implements PilotoServices{
 	public List<Piloto> getAll() {
 		return pilotoRepository.findAll();
 	}
-
 }

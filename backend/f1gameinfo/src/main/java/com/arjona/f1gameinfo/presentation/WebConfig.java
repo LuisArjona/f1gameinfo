@@ -4,6 +4,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * Clase de configuracion para permitir el acceso a
+ * imágenes dentro del proyecto a traves de llamadas API
+ */
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 

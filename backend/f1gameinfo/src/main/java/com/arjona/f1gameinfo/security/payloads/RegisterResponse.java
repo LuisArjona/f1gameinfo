@@ -1,5 +1,9 @@
 package com.arjona.f1gameinfo.security.payloads;
 
+/**
+ * POJO creado para devolver el qr y
+ * secreto de una petición de registro
+ */
 public class RegisterResponse {
     private String qr;
     private String secreto;

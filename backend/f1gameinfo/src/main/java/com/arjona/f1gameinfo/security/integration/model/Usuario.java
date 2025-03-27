@@ -18,6 +18,10 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
+/**
+ * Entidad que representa
+ * los usuarios
+ */
 @Entity
 @Table(name = "USUARIOS")
 public class Usuario {

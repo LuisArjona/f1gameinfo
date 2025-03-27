@@ -6,6 +6,11 @@ import com.arjona.f1gameinfo.security.integration.model.Usuario;
 import com.arjona.f1gameinfo.security.integration.repositories.UsuarioRepository;
 import com.arjona.f1gameinfo.security.integration.services.UsuarioServices;
 
+/**
+ * Servicio que gestiona la lógica
+ * de la aplicación sobre la
+ * autenticación de los usuarios
+ */
 @Service
 public class UsuarioServicesImpl implements UsuarioServices{
 

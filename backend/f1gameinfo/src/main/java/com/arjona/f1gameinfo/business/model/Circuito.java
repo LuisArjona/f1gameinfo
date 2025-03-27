@@ -9,6 +9,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+/**
+ * Entidad que representa
+ * los circuitos
+ */
 @Entity
 @Table(name = "CIRCUITOS")
 public class Circuito {

@@ -23,6 +23,10 @@ import com.arjona.f1gameinfo.business.model.CartaUsuarioDTO;
 import com.arjona.f1gameinfo.business.model.Circuito;
 import com.arjona.f1gameinfo.business.model.Piloto;
 
+/**
+ * Servicio que gestiona la lógica
+ * de la aplicación sobre las cartas
+ */
 @Service
 public class CartaServicesImpl implements CartaServices{
 	
@@ -133,5 +137,4 @@ public class CartaServicesImpl implements CartaServices{
 		Set<Circuito> circuitos = usuarioRepository.findCircuitosById(id);
 		return new CartaCompradaDTO(pilotos, circuitos);
 	}
-	
 }

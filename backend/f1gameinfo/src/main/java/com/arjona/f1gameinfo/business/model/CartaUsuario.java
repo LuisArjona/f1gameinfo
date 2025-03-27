@@ -11,6 +11,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
+/**
+ * Entidad que representa una carta propia
+ * que ha creado el usuario
+ */
 @Entity
 @Table(name="carta_usuario")
 public class CartaUsuario {

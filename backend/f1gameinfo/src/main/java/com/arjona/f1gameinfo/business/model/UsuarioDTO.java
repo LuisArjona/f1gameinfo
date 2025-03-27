@@ -1,5 +1,9 @@
 package com.arjona.f1gameinfo.business.model;
 
+/**
+ * DTO que representa las estadisticas
+ * del usuario para el ranking
+ */
 public class UsuarioDTO {
 	
 	private String username;

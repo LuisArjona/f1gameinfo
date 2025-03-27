@@ -17,6 +17,10 @@ import com.arjona.f1gameinfo.business.model.CartaCompradaDTO;
 import com.arjona.f1gameinfo.business.model.CartaUsuarioDTO;
 import com.arjona.f1gameinfo.business.services.CartaServices;
 
+/**
+ * Controlador encargado de atender las
+ * peticiones acerca de las cartas
+ */
 @CrossOrigin
 @RequestMapping("/cartas")
 @RestController
@@ -28,6 +32,16 @@ public class CartaController {
 		this.cartaServices = cartaServices;
 	}
 
+	/**
+	 * Atiende la petición de actualizar las 
+	 * cartas y/o monedas de un usuario
+	 * 
+	 * @param id del usuario
+	 * @param monedas del usuario
+	 * @param idPiloto a comprar
+	 * @param idCircuito a comprar
+	 * @return {@code 200 OK}
+	 */
 	@PatchMapping("/{id}")
 	public ResponseEntity<?> actualizarCartasUsuario(
 			@PathVariable Long id, 
@@ -39,21 +53,50 @@ public class CartaController {
 		return ResponseEntity.ok("Usuario actualizado correctamente.");
 	}
 	
+	/**
+	 * Atiende la petición para obtener
+	 * las cartas customizadas de todos los usuarios
+	 * 
+	 * @return {@code 200 OK} con {@code List} con las cartas customizadas
+	 */
 	@GetMapping("/usuarios")
 	public List<CartaUsuarioDTO> getAllDtos(){
 		return cartaServices.getAllDtos();
 	}
 	
+	/**
+	 * Atiende la petición para obtener
+	 * las carta customizada de un usuario
+	 * 
+	 * @param id del usuario
+	 * @return {@code 200 OK} con las carta customizada
+	 */
 	@GetMapping("/usuarios/{id}")
 	public CartaUsuarioDTO getCartaUsuarioFromUsuario(@PathVariable Long id){
 		return cartaServices.getCartaUsuario(id);
 	}
 	
+	/**
+	 * Atiende la petición para obtener las 
+	 * cartas compradas de un usuario
+	 * 
+	 * @param id del usuario
+	 * @return {@code 200 OK} con {@code List} con las cartas compradas
+	 */
 	@GetMapping("/{id}")
 	public CartaCompradaDTO getCompradasUsuario(@PathVariable Long id) {
 		return cartaServices.getCartasCompradasFromUsuario(id);
 	}
 	
+	/**
+	 * Atiende la petición para crear una
+	 * carta customizada para el usuario
+	 * 
+	 * @param id del usuario
+	 * @param valoracion de la carta
+	 * @param imagen de la carta
+	 * @return {@code 200 OK}
+	 */
 	@PostMapping("/uploads/{id}")
 	public ResponseEntity<?> subirCarta(
 			@PathVariable Long id, 

@@ -1,5 +1,9 @@
 package com.arjona.f1gameinfo.business.model;
 
+/**
+ * DTO que representa una carta propia
+ * que ha creado el usuario
+ */
 public class CartaUsuarioDTO {
 	
 	Integer valoracion;

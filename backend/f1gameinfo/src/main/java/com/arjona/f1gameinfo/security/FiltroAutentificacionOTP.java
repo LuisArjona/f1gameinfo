@@ -10,6 +10,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+/**
+ * Filtro para validar un código OTP
+ */
 public class FiltroAutentificacionOTP extends OncePerRequestFilter{
 	
 	@Autowired
@@ -18,6 +21,10 @@ public class FiltroAutentificacionOTP extends OncePerRequestFilter{
     @Autowired
     private UsuarioDetailsService usuarioDetailsService;
 
+    /**
+     * Solo si es el endpoint de login recupera el código OTP y el email e intenta validarlo, si es
+     * válido deja que continue con la cadena de seguridad, caso contrario devuelve {@code 401 UNAUTHORIZED}
+     */
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 	        throws ServletException, IOException {
