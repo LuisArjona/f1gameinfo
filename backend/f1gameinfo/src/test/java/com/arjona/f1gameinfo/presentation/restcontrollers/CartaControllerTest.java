@@ -1,0 +1,251 @@
+package com.arjona.f1gameinfo.presentation.restcontrollers;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.security.Key;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.testcontainers.containers.MySQLContainer;
+
+import com.arjona.f1gameinfo.business.model.CartaCompradaDTO;
+import com.arjona.f1gameinfo.business.model.CartaUsuarioDTO;
+import com.arjona.f1gameinfo.business.model.Circuito;
+import com.arjona.f1gameinfo.business.model.Piloto;
+import com.arjona.f1gameinfo.business.services.CartaServices;
+import com.arjona.f1gameinfo.security.UsuarioDetails;
+import com.arjona.f1gameinfo.security.UsuarioDetailsService;
+import com.arjona.f1gameinfo.security.UtilsJWT;
+import com.arjona.f1gameinfo.security.integration.model.Usuario;
+import com.arjona.f1gameinfo.security.integration.repositories.UsuarioRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
+import io.restassured.RestAssured;
+
+/**
+ * Testea {@link CartaController}
+ */
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureMockMvc
+public class CartaControllerTest {
+	
+	@LocalServerPort
+	private Integer port;
+	
+	@Autowired
+	private MockMvc mockMvc;
+	
+    @MockitoBean
+    private CartaServices cartaServices;
+    
+    private CartaController cartaController;
+    
+    @MockitoBean
+    private UtilsJWT utilsJWT;
+    
+    @MockitoBean
+    private UsuarioRepository usuarioRepository;
+    
+    @MockitoBean
+    private UsuarioDetailsService usuarioDetailsService;
+	
+    @Value("${f1gameinfo.secreto.jwt}")
+    private String jwtSecret;
+    
+    @Value("${f1gameinfo.tiempo.expiracion.jwt}")
+    private int jwtExpirationMs;
+    
+    private ObjectMapper mapper = new ObjectMapper();
+
+    static MySQLContainer<?> mysqlContainer = new MySQLContainer<>("mysql:9.2.0")
+    		.withDatabaseName("f1gameinfo")
+            .withUsername("user")
+            .withPassword("password")
+            .withInitScript("schema.sql");;
+    
+    @BeforeAll
+    static void beforeAll() {
+    	mysqlContainer.start();
+    }
+
+    @AfterAll
+    static void afterAll() {
+    	mysqlContainer.stop();
+    }
+    
+    @BeforeEach
+    void setUp() {
+      RestAssured.baseURI = "http://localhost:" + port;
+      cartaController = new CartaController(cartaServices);
+    }
+	
+	@DynamicPropertySource
+    static void configureProperties(DynamicPropertyRegistry registry) {
+      registry.add("spring.datasource.url", mysqlContainer::getJdbcUrl);
+      registry.add("spring.datasource.username", mysqlContainer::getUsername);
+      registry.add("spring.datasource.password", mysqlContainer::getPassword);
+    }
+	
+    @Test
+	void testActualizarCartasOk() throws Exception{
+        this.mockFiltro();
+		String jwtToken = "Bearer " + this.generateJwt();
+		
+		mockMvc.perform(patch("/cartas/2")
+				.param("monedas", "100")
+				.param("idPiloto", "1000")
+        		.header("Authorization", jwtToken))
+                .andExpect(status().isOk());
+		
+		verify(cartaServices, times(1)).actualizarCartas(2L, 100, 1000L, null);
+	}
+    
+    @Test
+	void testgetAllDtosOk() throws Exception{
+        this.mockFiltro();
+		String jwtToken = "Bearer " + this.generateJwt();
+		
+		CartaUsuarioDTO dto= new CartaUsuarioDTO();
+		dto.setUsername("prueba");		
+		String esperado = mapper.writeValueAsString(Arrays.asList(dto));
+		
+		when(cartaServices.getAllDtos()).thenReturn(Arrays.asList(dto));
+		
+		MvcResult resultado = mockMvc.perform(get("/cartas/usuarios")
+        		.header("Authorization", jwtToken))
+                .andExpect(status().isOk())
+                .andReturn();
+		
+		assertEquals(esperado, resultado.getResponse().getContentAsString());
+	}
+    
+    @Test
+	void testgetCartaUsuarioFromUsuarioOk() throws Exception{
+        this.mockFiltro();
+		String jwtToken = "Bearer " + this.generateJwt();
+		
+		CartaUsuarioDTO dto= new CartaUsuarioDTO();
+		dto.setUsername("prueba");		
+		String esperado = mapper.writeValueAsString(dto);
+		
+		when(cartaServices.getCartaUsuario(2L)).thenReturn(dto);
+		
+		MvcResult resultado = mockMvc.perform(get("/cartas/usuarios/2")
+        		.header("Authorization", jwtToken))
+                .andExpect(status().isOk())
+                .andReturn();
+		
+		assertEquals(esperado, resultado.getResponse().getContentAsString());
+	}
+    
+    @Test
+	void testgetCartasComporadasFromUsuarioOk() throws Exception{
+        this.mockFiltro();
+		String jwtToken = "Bearer " + this.generateJwt();
+		
+		Set<Piloto> pilotos = new HashSet<>();
+		Set<Circuito> circuitos = new HashSet<>();
+		Piloto piloto = new Piloto();
+		piloto.setId(1L);
+		Circuito circuito = new Circuito();
+		circuito.setId(1L);
+		pilotos.add(piloto);
+		circuitos.add(circuito);
+		
+		CartaCompradaDTO compradas = new CartaCompradaDTO(pilotos, circuitos);
+		
+		String esperado = mapper.writeValueAsString(compradas);
+		
+		when(cartaServices.getCartasCompradasFromUsuario(2L)).thenReturn(compradas);
+		
+		MvcResult resultado = mockMvc.perform(get("/cartas/2")
+        		.header("Authorization", jwtToken))
+                .andExpect(status().isOk())
+                .andReturn();
+		
+		assertEquals(esperado, resultado.getResponse().getContentAsString());
+	}
+    
+    @Test
+	void testSubirCartaOk() throws Exception{
+        this.mockFiltro();
+		String jwtToken = "Bearer " + this.generateJwt();
+		
+	    MockMultipartFile imagen = new MockMultipartFile("imagen", "imagen.jpg", 
+	    		"image/jpeg", "test image content".getBytes());
+		
+	    mockMvc.perform(multipart("/cartas/uploads/2")
+	            .file(imagen)
+	            .param("valoracion", "99")
+	            .header("Authorization", jwtToken))
+	            .andExpect(status().isOk());
+		
+		verify(cartaServices, times(1)).subirCarta(2L, 99, imagen);
+	}
+    
+    
+    /**
+     * Genera un jwt para mockear
+     * @return jwt
+     */
+    private String generateJwt() {
+    	Map<String,Object> claims = new HashMap<String, Object>();
+        
+        claims.put("username", "prueba1@prueba.com");
+        return Jwts.builder()
+                .setClaims(claims)
+                .setSubject("1")
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + jwtExpirationMs))
+                .signWith(decodificarSecreto())
+                .compact();
+    }
+    
+    /**
+     * Mockea el comportamiento del filtro JWT
+     */
+    private void mockFiltro() {
+	     Usuario user = new Usuario(1L, "prueba1@prueba.com", "password", new HashSet<>(), new HashSet<>(), 0, "secreto");
+		 
+		 UsuarioDetails usuarioDetails = new UsuarioDetails(user);
+	     when(usuarioRepository.findByUsername(user.getUsername())).thenReturn(Optional.of(user));
+	     when(usuarioDetailsService.loadUserByUsername(user.getUsername())).thenReturn(usuarioDetails);
+	     when(utilsJWT.validarJwt(any(String.class))).thenReturn(true);
+	     when(utilsJWT.getTokenUsername(any(String.class))).thenReturn(user.getUsername());
+    }
+    
+    private Key decodificarSecreto() {
+        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
+    }
+}
