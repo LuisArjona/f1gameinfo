@@ -21,14 +21,6 @@ export class CartasusuariosComponent {
     });
   }
 
-  dividirEnFilas(array: any[], tamanoFila: number): any[][] {
-    const filas: any[][] = [];
-    for (let i = 0; i < array.length; i += tamanoFila) {
-      filas.push(array.slice(i, i + tamanoFila));
-    }
-    return filas;
-  }
-
   activarMenu() {
     this.menuActivo = !this.menuActivo;
   }

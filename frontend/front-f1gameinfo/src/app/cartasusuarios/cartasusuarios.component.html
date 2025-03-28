@@ -18,12 +18,10 @@
 
     <h2>Cartas de Usuarios</h2>
     <div class="cartas-container">
-        <div class="fila" *ngFor="let fila of dividirEnFilas(cartas, 3)">
-            <div class="carta" *ngFor="let carta of fila">
-                <div class="valoracion">Valoración: {{ carta.valoracion }}</div>
-                <img [src]="'http://localhost:8080' + carta.rutaImagen" alt="Imagen de la Carta">
-                <p>{{ carta.username.split('@')[0] }}</p>
-            </div>
+        <div class="carta" *ngFor="let carta of cartas">
+            <div class="valoracion">Valoración: {{ carta.valoracion }}</div>
+            <img [src]="'http://localhost:8080' + carta.rutaImagen" alt="Imagen de la Carta">
+            <p>{{ carta.username.split('@')[0] }}</p>
         </div>
     </div>
 </div>

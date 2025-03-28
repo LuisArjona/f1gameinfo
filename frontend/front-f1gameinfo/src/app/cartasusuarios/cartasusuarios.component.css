@@ -75,20 +75,15 @@ h2 {
 }
 
 .cartas-container {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
-}
-
-.fila {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
+    max-width: 1200px; /* Limita el ancho máximo */
+    margin: 0 auto; /* Centra el contenido */
 }
 
 .carta {
     text-align: center;
-    max-width: 300px;
     padding: 20px;
     background-color: #f9f9f9;
     border: 2px solid #d71920;
@@ -130,34 +125,34 @@ h2 {
     .navbar {
         flex-direction: column;
         align-items: flex-start;
-      }
-    
-      .navbar-toggle {
+    }
+
+    .navbar-toggle {
         display: block;
-      }
-    
-      .navbar-links {
+    }
+
+    .navbar-links {
         flex-direction: column;
         max-height: 0;
         opacity: 0;
         overflow: hidden;
         gap: 10px;
         width: 100%;
-      }
-    
-      .navbar-links.active {
+    }
+
+    .navbar-links.active {
         opacity: 1;
         max-height: 300px;
-      }
-    
-      .navbar-links a {
+    }
+
+    .navbar-links a {
         font-size: 14px;
         padding: 5px 0;
         display: block;
         width: 100%;
         text-align: left;
-      }
     }
+}
 
 @media (max-width: 480px) {
     .navbar-logo img {
