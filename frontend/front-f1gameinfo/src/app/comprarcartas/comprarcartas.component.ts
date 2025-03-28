@@ -38,14 +38,6 @@ export class ComprarcartasComponent {
     });
   }
 
-  dividirEnFilas(array: any[], tamanoFila: number): any[][] {
-    const filas: any[][] = [];
-    for (let i = 0; i < array.length; i += tamanoFila) {
-      filas.push(array.slice(i, i + tamanoFila));
-    }
-    return filas;
-  }
-
   comprarPiloto(piloto: any) {
     if (this.monedas >= piloto.precio) {
       this.cartaService.actualizarCartasUsuario(this.monedas - piloto.precio, piloto.id).subscribe(() => {

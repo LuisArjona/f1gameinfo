@@ -26,8 +26,8 @@
     <div class="compras-container">
         <div class="columna">
             <h3>Pilotos</h3>
-            <div class="fila" *ngFor="let fila of dividirEnFilas(pilotos, 3)">
-                <div class="carta piloto" *ngFor="let piloto of fila">
+            <div class="cartas-grid">
+                <div class="carta piloto" *ngFor="let piloto of pilotos">
                     <div class="valoracion">
                         {{ piloto.valoracion }}
                     </div>
@@ -57,8 +57,8 @@
 
         <div class="columna">
             <h3>Circuitos</h3>
-            <div class="fila" *ngFor="let fila of dividirEnFilas(circuitos, 3)">
-                <div class="carta circuito" *ngFor="let circuito of fila">
+            <div class="cartas-grid">
+                <div class="carta circuito" *ngFor="let circuito of circuitos">
                     <div class="imagen-carta">
                         <img [src]="'http://localhost:8080' + circuito.rutaImagen" alt="Imagen del Circuito">
                     </div>
