@@ -25,7 +25,7 @@
             </div>
             @for(piloto of pilotos; track piloto.id) {
             <div class="item-card">
-                <img src="http://localhost:8080{{piloto.rutaImagen}}" alt="Imagen de {{piloto.nombre}}">
+                <img src="https://clever-emotion-production.up.railway.app{{piloto.rutaImagen}}" alt="Imagen de {{piloto.nombre}}">
                 <div class="card-header">{{piloto.nombre}}</div>
                 <div class="stats">
                     <div><strong>Victorias:</strong> {{piloto.victorias}}</div>
@@ -49,7 +49,7 @@
             </div>
             @for(circuito of circuitos; track circuito.id) {
             <div class="item-card">
-                <img src="http://localhost:8080{{circuito.rutaImagen}}" alt="Imagen de {{circuito.nombre}}">
+                <img src="https://clever-emotion-production.up.railway.app{{circuito.rutaImagen}}" alt="Imagen de {{circuito.nombre}}">
                 <div class="card-header">{{circuito.nombre}}</div>
                 <div class="stats">
                     <div><strong>País:</strong> {{circuito.pais}}</div>

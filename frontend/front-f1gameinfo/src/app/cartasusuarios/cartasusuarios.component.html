@@ -20,7 +20,7 @@
     <div class="cartas-container">
         <div class="carta" *ngFor="let carta of cartas">
             <div class="valoracion">Valoración: {{ carta.valoracion }}</div>
-            <img [src]="'http://localhost:8080' + carta.rutaImagen" alt="Imagen de la Carta">
+            <img [src]="'https://clever-emotion-production.up.railway.app' + carta.rutaImagen" alt="Imagen de la Carta">
             <p>{{ carta.username.split('@')[0] }}</p>
         </div>
     </div>

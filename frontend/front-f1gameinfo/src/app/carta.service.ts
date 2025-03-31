@@ -41,7 +41,7 @@ export class CartaService {
         "Authorization": `Bearer ${token}`
       })
     };
-    return this.http.get('http://localhost:8080/pilotos', headers);
+    return this.http.get('https://clever-emotion-production.up.railway.app/pilotos', headers);
   }
 
   getCircuitos():Observable<any>{
@@ -53,7 +53,7 @@ export class CartaService {
         "Authorization": `Bearer ${token}`
       })
     };
-    return this.http.get('http://localhost:8080/circuitos', headers);
+    return this.http.get('https://clever-emotion-production.up.railway.app/circuitos', headers);
   }
 
   getCartasCompradas(): Observable<any> {
@@ -68,7 +68,7 @@ export class CartaService {
       })
     };
 
-    return this.http.get(`http://localhost:8080/cartas/${id}`, headers);
+    return this.http.get(`https://clever-emotion-production.up.railway.app/cartas/${id}`, headers);
   }
 
   getCartasCustoms(): Observable<any> {
@@ -81,7 +81,7 @@ export class CartaService {
       })
     };
 
-    return this.http.get(`http://localhost:8080/cartas/usuarios`, headers);
+    return this.http.get(`https://clever-emotion-production.up.railway.app/cartas/usuarios`, headers);
   }
 
   getCartaCustomFromUsuario(): Observable<any> {
@@ -96,7 +96,7 @@ export class CartaService {
       })
     };
 
-    return this.http.get(`http://localhost:8080/cartas/usuarios/${id}`, headers);
+    return this.http.get(`https://clever-emotion-production.up.railway.app/cartas/usuarios/${id}`, headers);
   }
 
   actualizarCartasUsuario(monedas: number, idPiloto?: number, idCircuito?: number): Observable<any> {
@@ -120,7 +120,7 @@ export class CartaService {
       params = params.set('idCircuito', idCircuito.toString());
     }
 
-    return this.http.patch(`http://localhost:8080/cartas/${id}`, {}, { headers, params, responseType: 'text' as 'json' });
+    return this.http.patch(`https://clever-emotion-production.up.railway.app/cartas/${id}`, {}, { headers, params, responseType: 'text' as 'json' });
   }
 
 
@@ -138,7 +138,7 @@ export class CartaService {
     formData.append('valoracion', valoracion.toString());
     formData.append('imagen', imagen);
 
-    return this.http.post(`http://localhost:8080/cartas/uploads/${id}`, formData, { headers,
+    return this.http.post(`https://clever-emotion-production.up.railway.app/cartas/uploads/${id}`, formData, { headers,
       responseType: 'text' as 'json' });
   }
 
@@ -152,7 +152,7 @@ export class CartaService {
       })
     };
 
-    return this.http.get('http://localhost:8080/usuarios/ranking', headers);
+    return this.http.get('https://clever-emotion-production.up.railway.app/usuarios/ranking', headers);
   }
 
   getMonedasFromUsuario(): Observable<any> {
@@ -167,7 +167,7 @@ export class CartaService {
       })
     };
 
-    return this.http.get(`http://localhost:8080/usuarios/${id}/monedas`, headers);
+    return this.http.get(`https://clever-emotion-production.up.railway.app/usuarios/${id}/monedas`, headers);
   }
 
 }

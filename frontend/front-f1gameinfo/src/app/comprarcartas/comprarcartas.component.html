@@ -32,7 +32,7 @@
                         {{ piloto.valoracion }}
                     </div>
                     <div class="imagen-carta">
-                        <img [src]="'http://localhost:8080' + piloto.rutaImagen" alt="Imagen del Piloto">
+                        <img [src]="'https://clever-emotion-production.up.railway.app' + piloto.rutaImagen" alt="Imagen del Piloto">
                     </div>
                     <div class="info-carta">
                         <h4>{{ piloto.nombre }}</h4>
@@ -60,7 +60,7 @@
             <div class="cartas-grid">
                 <div class="carta circuito" *ngFor="let circuito of circuitos">
                     <div class="imagen-carta">
-                        <img [src]="'http://localhost:8080' + circuito.rutaImagen" alt="Imagen del Circuito">
+                        <img [src]="'https://clever-emotion-production.up.railway.app' + circuito.rutaImagen" alt="Imagen del Circuito">
                     </div>
                     <div class="info-carta">
                         <h4>{{ circuito.nombre }}</h4>

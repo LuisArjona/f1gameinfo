@@ -19,7 +19,7 @@
     <div *ngIf="cartaCreada; else crearCartaForm">
         <div class="carta-creada">
             <div class="valoracion">Valoración: {{ cartaCreada.valoracion }}</div>
-            <img [src]="'http://localhost:8080' + cartaCreada.rutaImagen" alt="Imagen de la Carta">
+            <img [src]="'https://clever-emotion-production.up.railway.app' + cartaCreada.rutaImagen" alt="Imagen de la Carta">
             <p>{{ cartaCreada.username.split('@')[0] }}</p>
         </div>
     </div>

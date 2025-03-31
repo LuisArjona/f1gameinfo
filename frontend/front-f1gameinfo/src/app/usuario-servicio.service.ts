@@ -11,7 +11,7 @@ export class UsuarioServicioService {
   constructor(private http: HttpClient) { }
 
   registrarUsuarioDos(email:string,pass:string): Observable<any>{
-    return this.http.post('http://localhost:8080/autentificacion/registro', {"username": email, "password":pass});
+    return this.http.post('https://clever-emotion-production.up.railway.app/autentificacion/registro', {"username": email, "password":pass});
   }
 
   loguearUsuarioDos(email:string,pass:string,otp:string): Observable<any>{
@@ -20,7 +20,7 @@ export class UsuarioServicioService {
     .set('password', pass)
     .set('otp', otp);
 
-  return this.http.post('http://localhost:8080/autentificacion/login', null, { params });
+  return this.http.post('https://clever-emotion-production.up.railway.app/autentificacion/login', null, { params });
   }
 
 
