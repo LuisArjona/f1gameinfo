@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { CartaService } from '../carta.service';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { ProgressBar, ProgressBarModule } from 'primeng/progressbar';
 
 @Component({
   selector: 'app-comprarcartas',
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, ProgressBarModule],
   templateUrl: './comprarcartas.component.html',
   styleUrl: './comprarcartas.component.css',
 })
@@ -83,11 +84,11 @@ export class ComprarcartasComponent {
   }
 
   getPorcentajePilotos(): number {
-    return (this.pilotosUsu.length / this.pilotos.length) * 100;
+    return Math.round((this.pilotosUsu.length / this.pilotos.length) * 100);
   }
-
+  
   getPorcentajeCircuitos(): number {
-    return (this.circuitosUsu.length / this.circuitos.length) * 100;
+    return Math.round((this.circuitosUsu.length / this.circuitos.length) * 100);
   }
 
   cerrarSesion(): void {

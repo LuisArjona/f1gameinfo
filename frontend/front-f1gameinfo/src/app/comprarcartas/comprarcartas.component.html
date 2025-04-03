@@ -25,6 +25,7 @@
     <div class="compras-container">
         <div class="columna">
             <h3>Pilotos</h3>
+            <p-progressbar [value]="getPorcentajePilotos()" [style]="{'--p-progressbar-value-background': 'red'}"></p-progressbar>
             <div class="cartas-grid">
                 <div class="carta piloto" *ngFor="let piloto of pilotos">
                     <div class="valoracion">
@@ -56,6 +57,7 @@
 
         <div class="columna">
             <h3>Circuitos</h3>
+            <p-progressbar [value]="getPorcentajeCircuitos()" [style]="{'--p-progressbar-value-background': 'red'}"></p-progressbar>
             <div class="cartas-grid">
                 <div class="carta circuito" *ngFor="let circuito of circuitos">
                     <div class="imagen-carta">
