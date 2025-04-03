@@ -3,12 +3,15 @@ import { CartaService } from '../carta.service';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ProgressBar, ProgressBarModule } from 'primeng/progressbar';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-comprarcartas',
-  imports: [RouterModule, CommonModule, ProgressBarModule],
+  imports: [RouterModule, CommonModule, ProgressBarModule, ToastModule],
   templateUrl: './comprarcartas.component.html',
   styleUrl: './comprarcartas.component.css',
+  providers: [MessageService]
 })
 export class ComprarcartasComponent {
   pilotos: any[] = [];
@@ -18,7 +21,7 @@ export class ComprarcartasComponent {
   monedas: number = 0;
   menuActivo: boolean = false;
 
-  constructor(private cartaService: CartaService) {}
+  constructor(private cartaService: CartaService, private messageService: MessageService) {}
 
   ngOnInit() {
     this.cartaService.getPilotos().subscribe((data) => {
@@ -44,6 +47,10 @@ export class ComprarcartasComponent {
       this.cartaService.actualizarCartasUsuario(this.monedas - piloto.precio, piloto.id).subscribe(() => {
         this.pilotosUsu.push(piloto);
         this.monedas -= piloto.precio;
+        this.messageService.add({severity:'success', 
+          summary:'Compra Exitosa', 
+          detail:`Has añadido a ${piloto.nombre} a tu colección`,
+          life: 5000 });
       });
     }
   }
@@ -53,6 +60,10 @@ export class ComprarcartasComponent {
       this.cartaService.actualizarCartasUsuario(this.monedas - circuito.precio, undefined, circuito.id).subscribe(() => {
         this.circuitosUsu.push(circuito);
         this.monedas -= circuito.precio;
+        this.messageService.add({severity:'success', 
+          summary:'Compra Exitosa', 
+          detail:`Has añadido a ${circuito.nombre} a tu colección`,
+          life: 5000 });
       });
     }
   }
@@ -94,5 +105,4 @@ export class ComprarcartasComponent {
   cerrarSesion(): void {
     localStorage.clear();
   }
-  
 }
