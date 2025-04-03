@@ -20,7 +20,7 @@
         <div class="carta" *ngFor="let carta of cartas">
             <div class="valoracion">Valoración: {{ carta.valoracion }}</div>
             <img [src]="'https://clever-emotion-production.up.railway.app' + carta.rutaImagen" alt="Imagen de la Carta">
-            <p>{{ carta.username.split('@')[0] }}</p>
+            <p><i class="pi pi-user" style="font-size: 1.2rem; color: black;"></i> {{ carta.username.split('@')[0] }}</p>
         </div>
     </div>
 </div>

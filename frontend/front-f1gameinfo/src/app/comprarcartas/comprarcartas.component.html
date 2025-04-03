@@ -17,15 +17,16 @@
 <div class="container">
     <h2>Comprar Cartas</h2>
     <div class="contador-monedas">
-        <span>Monedas:</span>
+        <span><i class="pi pi-money-bill" style="font-size: 2rem; color: green;"></i></span>
         <div class="monedas">{{ monedas }}</div>
-        <button class="obtener-monedas" (click)="incrementarMonedas()">+100 Monedas</button>
+        <button class="obtener-monedas" (click)="incrementarMonedas()">+100 <i class="pi pi-money-bill" style="font-size: 1.4rem; color: green;"></i></button>
     </div>
 
     <div class="compras-container">
         <div class="columna">
             <h3>Pilotos</h3>
             <p-progressbar [value]="getPorcentajePilotos()" [style]="{'--p-progressbar-value-background': 'red'}"></p-progressbar>
+            <br>
             <div class="cartas-grid">
                 <div class="carta piloto" *ngFor="let piloto of pilotos">
                     <div class="valoracion">
@@ -36,9 +37,9 @@
                     </div>
                     <div class="info-carta">
                         <h4>{{ piloto.nombre }}</h4>
-                        <p><strong>Precio:</strong> {{ piloto.precio }} monedas</p>
-                        <p><strong>Victorias:</strong> {{ piloto.victorias }}</p>
-                        <p><strong>Podios:</strong> {{ piloto.podios }}</p>
+                        <p><i class="pi pi-money-bill" style="font-size: 1.2rem; color: green;"></i><strong> Precio:</strong> {{ piloto.precio }}</p>
+                        <p><i class="pi pi-trophy" style="font-size: 1.2rem; color: gold;"></i><strong> Victorias:</strong> {{ piloto.victorias }}</p>
+                        <p><i class="pi pi-trophy" style="font-size: 1.2rem; color: silver;"></i><strong> Podios:</strong> {{ piloto.podios }}</p>
                     </div>
                     <button 
                         [disabled]="isPilotoDisabled(piloto)"
@@ -58,6 +59,7 @@
         <div class="columna">
             <h3>Circuitos</h3>
             <p-progressbar [value]="getPorcentajeCircuitos()" [style]="{'--p-progressbar-value-background': 'red'}"></p-progressbar>
+            <br>
             <div class="cartas-grid">
                 <div class="carta circuito" *ngFor="let circuito of circuitos">
                     <div class="imagen-carta">
@@ -65,8 +67,8 @@
                     </div>
                     <div class="info-carta">
                         <h4>{{ circuito.nombre }}</h4>
-                        <p><strong>País:</strong> {{ circuito.pais }}</p>
-                        <p><strong>Precio:</strong> {{ circuito.precio }} monedas</p>
+                        <p><i class="pi pi-map-marker" style="font-size: 1.2rem; color: red;"></i><strong> País:</strong> {{ circuito.pais }}</p>
+                        <p><i class="pi pi-money-bill" style="font-size: 1.2rem; color: green;"></i><strong> Precio:</strong> {{ circuito.precio }}</p>
                     </div>
                     <button 
                         [disabled]="isCircuitoDisabled(circuito)"
