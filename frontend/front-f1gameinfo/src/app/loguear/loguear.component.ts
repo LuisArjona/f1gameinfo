@@ -3,11 +3,14 @@ import { FormsModule } from '@angular/forms';
 import { UsuarioServicioService } from '../usuario-servicio.service';
 import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
+import { InputOtpModule } from 'primeng/inputotp';
+import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from 'primeng/password';
 import Swal from 'sweetalert2';
 
 @Component({
     selector: 'app-loguear',
-    imports: [FormsModule, RouterModule],
+    imports: [FormsModule, RouterModule, InputOtpModule, InputTextModule, PasswordModule],
     templateUrl: './loguear.component.html',
     styleUrls: ['./loguear.component.css']
 })

@@ -4,11 +4,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UsuarioServicioService } from '../usuario-servicio.service';
 import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
+import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from 'primeng/password';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registrar',
-  imports: [ReactiveFormsModule, RouterModule],
+  imports: [ReactiveFormsModule, RouterModule, InputTextModule, PasswordModule],
   templateUrl: './registrar.component.html',
   styleUrls: ['./registrar.component.css']
 })

@@ -4,31 +4,45 @@
       <img src="favicon.png" alt="F1GameInfo Logo" class="pi-spin logo">
       <h1 class="app-title">F1GameInfo</h1>
     </div>
-    <h2>Iniciar Sesión</h2>
-    <label class="login-label">
-      Email:
-      <input type="email" [(ngModel)]="email" name="email" required class="login-input">
-    </label>
-    <label class="login-label">
-      Contraseña:
-      <div class="password-container">
-        <input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="pass" name="password" required class="login-input">
-        <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">
-          <i [class]="showPassword ? 'pi pi-eye' : 'pi pi-eye-slash'"></i>
-        </button>
-      </div>
-    </label>
-    <label class="login-label">
-      Código de Acceso:
-      <input type="email" [(ngModel)]="otp" name="otp" required class="login-input">
-    </label>
-    <button type="submit" class="login-button">Iniciar Sesión</button>
-    @if(intentado) {
+    <h2 class="form-title">Iniciar Sesión</h2>
+    
+    <div class="form-group">
+      <label class="login-label">
+        <span class="label-text">Email</span>
+        <span class="p-input-icon-left">
+          <input type="text" pInputText [(ngModel)]="email" name="email" required 
+                 placeholder="tu@email.com" class="email-input" />
+        </span>
+      </label>
+    </div>
+    
+    <div class="form-group">
+      <label class="login-label">
+        <span class="label-text">Contraseña</span>
+        <p-password [(ngModel)]="pass" name="password" required [feedback]="false" 
+                   [toggleMask]="true" placeholder="••••••••" 
+                   inputStyleClass="password-input" [inputStyle]="{'width': '100%'}">
+        </p-password>
+      </label>
+    </div>
+    
+    <div class="form-group">
+      <label class="login-label">
+        <span class="label-text">Código de Acceso</span>
+        <p-inputOtp [(ngModel)]="otp" name="otp" required [integerOnly]="true" 
+                   [length]="6" [mask]="true" inputStyleClass="otp-input">
+        </p-inputOtp>
+      </label>
+    </div>
+    
+    <button type="submit" pButton class="login-button" label="Iniciar Sesión">
+      <i class="pi pi-arrow-right button-icon"></i>
+    </button>
+    
       <div class="login-message">
-        @if(!exito) {
-          <p class="error-message">¿Necesitas crear una <a [routerLink]="['/register']" routerLinkActive="router-link-active">cuenta</a>?</p>
-        }
+          <p class="error-message">¿Necesitas crear una <a [routerLink]="['/register']" class="register-link">cuenta</a>?</p>
       </div>
-    }
   </form>
+  
+  <div class="background-overlay"></div>
 </div>
