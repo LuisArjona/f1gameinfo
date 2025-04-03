@@ -35,9 +35,18 @@
       </label>
     </div>
     
-    <button type="submit" pButton class="login-button" label="Iniciar Sesión">
-      <i class="pi pi-arrow-right button-icon"></i>
-    </button>
+    <button type="submit" 
+        pButton 
+        class="login-button" 
+        [disabled]="cargando">
+      @if (cargando) {
+        <i class="pi pi-spinner pi-spin" style="margin-right: 8px"></i>
+          Procesando...
+      } @else {
+        <i class="pi pi-arrow-right button-icon"></i>
+          Iniciar Sesión
+      }
+</button>
     
       <div class="login-message">
           <p class="error-message">¿Necesitas crear una <a [routerLink]="['/register']" class="register-link">cuenta</a>?</p>

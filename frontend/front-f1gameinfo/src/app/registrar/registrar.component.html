@@ -29,11 +29,39 @@
       <div class="form-group">
         <label class="register-label">
           <span class="label-text">Contraseña</span>
-          <p-password formControlName="pass" [feedback]="true" [toggleMask]="true"
+          
+          <p-password formControlName="pass" [feedback]="true" [pKeyFilter]="bloquearEspacios" [toggleMask]="true"
                      placeholder="••••••••" inputStyleClass="password-input" 
                      [inputStyle]="{'width': '100%'}"
                      promptLabel="Crea una contraseña" weakLabel="Contraseña débil" mediumLabel="Contraseña mejorable" strongLabel="Contraseña segura">
+
+                     <ng-template pTemplate="footer">
+                      <ul class="pl-2 ml-2 my-0 leading-normal">
+                        <li>
+                          <i class="pi" [class.pi-check]="tiene8Caracteres()" [class.pi-times]="!tiene8Caracteres()"></i>
+                          Al menos 8 carácteres
+                        </li>
+                        <li>
+                          <i class="pi" [class.pi-check]="tieneMayus()" [class.pi-times]="!tieneMayus()"></i>
+                          Una mayúscula
+                        </li>
+                        <li>
+                          <i class="pi" [class.pi-check]="tieneMinus()" [class.pi-times]="!tieneMinus()"></i>
+                          Una minúscula
+                        </li>
+                        <li>
+                          <i class="pi" [class.pi-check]="tieneNumero()" [class.pi-times]="!tieneNumero()"></i>
+                          Un número
+                        </li>
+                        <li>
+                          <i class="pi" [class.pi-check]="tieneCaracterEspecial()" [class.pi-times]="!tieneCaracterEspecial()"></i>
+                          Un carácter especial
+                        </li>
+                      </ul>
+                    </ng-template>
+
           </p-password>
+
           @if (form.get('pass')?.invalid && form.get('pass')?.touched) {
             <div class="error-message">
               @if (form.get('pass')?.errors?.['required']) {
@@ -41,6 +69,9 @@
               }
               @if (form.get('pass')?.errors?.['minlength']) {
                 <small>Mínimo 8 caracteres</small>
+              }
+              @if (form.get('pass')?.errors?.['passwordComplexity']) {
+                <small>Debe contener: 1 mayúscula, 1 minúscula, 1 número y 1 carácter especial</small>
               }
             </div>
           }
@@ -50,7 +81,7 @@
       <div class="form-group">
         <label class="register-label">
           <span class="label-text">Confirmar Contraseña</span>
-          <p-password formControlName="confirm_pass" [feedback]="false" [toggleMask]="true"
+          <p-password formControlName="confirm_pass" [feedback]="false" [pKeyFilter]="bloquearEspacios" [toggleMask]="true"
                      placeholder="••••••••" inputStyleClass="password-input" 
                      [inputStyle]="{'width': '100%'}">
           </p-password>
@@ -76,9 +107,17 @@
         </p>
       }
       
-      <button type="submit" pButton class="register-button" [disabled]="form.invalid" 
-              label="Registrarse">
-        <i class="pi pi-user-plus button-icon"></i>
+      <button type="submit" 
+        pButton 
+        class="register-button" 
+        [disabled]="cargando || form.invalid">
+        @if (cargando) {
+          <i class="pi pi-spinner pi-spin" style="margin-right: 8px"></i>
+          Registrando...
+        } @else {
+          <i class="pi pi-user-plus button-icon"></i>
+          Registrarse
+        }
       </button>
     </form>
   }
