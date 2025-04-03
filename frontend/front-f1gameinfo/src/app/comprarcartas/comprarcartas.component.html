@@ -1,6 +1,6 @@
 <nav class="navbar">
     <div class="navbar-logo">
-        <img src="favicon.png" alt="Logo F1">
+        <img class="pi-spin" src="favicon.png" alt="Logo F1">
     </div>
     <button class="navbar-toggle" (click)="activarMenu()">
         <i class="fa-solid fa-bars"></i>
@@ -30,7 +30,7 @@
             <div class="cartas-grid">
                 <div class="carta piloto" *ngFor="let piloto of pilotos">
                     <div class="valoracion">
-                        {{ piloto.valoracion }}
+                        <i class="pi pi-spin pi-cog" style="font-size: 1rem; color: white;"></i> {{ piloto.valoracion }}
                     </div>
                     <div class="imagen-carta">
                         <img [src]="'https://clever-emotion-production.up.railway.app' + piloto.rutaImagen" alt="Imagen del Piloto">
@@ -46,10 +46,10 @@
                         (click)="comprarPiloto(piloto)"
                         class="boton-carta">
                         @if(isPilotoComprado(piloto)){
-                            Comprado
+                            <i class="pi pi-check" style="font-size: 1.8rem; color: lightgreen;"></i>
                         }
                         @else{
-                            Comprar
+                            <i class="pi pi-shopping-cart" style="font-size: 1.8rem; color: white;"></i>
                         }
                     </button>
                 </div>
@@ -75,10 +75,10 @@
                         (click)="comprarCircuito(circuito)"
                         class="boton-carta">
                         @if(isCircuitoComprado(circuito)){
-                            Comprado
+                            <i class="pi pi-check" style="font-size: 1.5rem; color: lightgreen;"></i>
                         }
                         @else{
-                            Comprar
+                            <i class="pi pi-shopping-cart" style="font-size: 1.8rem; color: white;"></i>
                         }
                     </button>
                 </div>
