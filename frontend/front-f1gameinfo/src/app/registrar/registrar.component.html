@@ -11,7 +11,7 @@
         <label class="register-label">
           <span class="label-text">Email</span>
           <div class="input-with-icon">
-            <input type="text" pInputText formControlName="email" 
+            <input type="text" pInputText [pKeyFilter]="bloquearEspacios" formControlName="email"
                    placeholder="tu@email.com" class="register-input">
           </div>
           @if (form.get('email')?.invalid && form.get('email')?.touched) {
@@ -26,13 +26,13 @@
           }
         </label>
       </div>
-      
       <div class="form-group">
         <label class="register-label">
           <span class="label-text">Contraseña</span>
-          <p-password formControlName="pass" [feedback]="false" [toggleMask]="true"
+          <p-password formControlName="pass" [feedback]="true" [toggleMask]="true"
                      placeholder="••••••••" inputStyleClass="password-input" 
-                     [inputStyle]="{'width': '100%'}">
+                     [inputStyle]="{'width': '100%'}"
+                     promptLabel="Crea una contraseña" weakLabel="Contraseña débil" mediumLabel="Contraseña mejorable" strongLabel="Contraseña segura">
           </p-password>
           @if (form.get('pass')?.invalid && form.get('pass')?.touched) {
             <div class="error-message">

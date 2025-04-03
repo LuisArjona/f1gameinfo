@@ -6,11 +6,12 @@ import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
+import { KeyFilterModule } from 'primeng/keyfilter';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registrar',
-  imports: [ReactiveFormsModule, RouterModule, InputTextModule, PasswordModule],
+  imports: [ReactiveFormsModule, RouterModule, InputTextModule, PasswordModule, KeyFilterModule],
   templateUrl: './registrar.component.html',
   styleUrls: ['./registrar.component.css']
 })
@@ -21,6 +22,7 @@ export class RegistrarComponent {
   intentado: boolean = false;
   qr: string = "";
   secreto: string = "";
+  bloquearEspacios: RegExp = /^[^\s]*$/;
 
   constructor(private fb: FormBuilder, private usuServicio: UsuarioServicioService, private router: Router) {
     this.form = this.fb.group({
