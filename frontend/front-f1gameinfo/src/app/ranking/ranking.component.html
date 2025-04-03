@@ -18,9 +18,27 @@
   <div class="ranking-container">
     <h2>Ranking de Usuarios</h2>
     <div class="filtros">
-      <button (click)="ordenarPorTotal()">Ordenar por Total</button>
-      <button (click)="ordenarPorPilotos()">Ordenar por Pilotos</button>
-      <button (click)="ordenarPorCircuitos()">Ordenar por Circuitos</button>
+      <button (click)="ordenarPorTotal()">Ordenar por Total 
+        @if(filtroTotal){
+          <i class="pi pi-filter-fill" style="font-size: 1rem; color: white;"></i>
+        }@else{
+          <i class="pi pi-filter" style="font-size: 1rem; color: white;"></i>
+        }
+      </button>
+      <button (click)="ordenarPorPilotos()">Ordenar por Pilotos 
+        @if(filtroPilotos){
+          <i class="pi pi-filter-fill" style="font-size: 1rem; color: white;"></i>
+        }@else{
+          <i class="pi pi-filter" style="font-size: 1rem; color: white;"></i>
+        }
+      </button>
+      <button (click)="ordenarPorCircuitos()">Ordenar por Circuitos 
+        @if(filtroCircuitos){
+          <i class="pi pi-filter-fill" style="font-size: 1rem; color: white;"></i>
+        }@else{
+          <i class="pi pi-filter" style="font-size: 1rem; color: white;"></i>
+        }
+      </button>
     </div>
     <div class="ranking-list">
       @for(user of ranking; track user.username) {

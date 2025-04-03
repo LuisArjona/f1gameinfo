@@ -19,8 +19,20 @@
         <div class="section">
             <h2>Pilotos</h2>
             <div class="filters">
-                <button (click)="ordenarPorVictorias()">Ordenar por Victorias</button>
-                <button (click)="ordenarPorCarreras()">Ordenar por Carreras</button>
+                <button (click)="ordenarPorVictorias()">Ordenar por Victorias
+                    @if(filtroVictorias){
+                        <i class="pi pi-filter-fill" style="font-size: 1rem; color: white;"></i>
+                      }@else{
+                        <i class="pi pi-filter" style="font-size: 1rem; color: white;"></i>
+                      }
+                </button>
+                <button (click)="ordenarPorCarreras()">Ordenar por Carreras
+                    @if(filtroCarreras){
+                        <i class="pi pi-filter-fill" style="font-size: 1rem; color: white;"></i>
+                      }@else{
+                        <i class="pi pi-filter" style="font-size: 1rem; color: white;"></i>
+                      }
+                </button>
             </div>
             @for(piloto of pilotos; track piloto.id) {
             <div class="item-card">
@@ -44,7 +56,20 @@
         <div class="section">
             <h2>Circuitos</h2>
             <div class="filters">
-                <button (click)="ordenarPorAnhoConstruccion()">Ordenar por Año de Construcción</button>
+                <button (click)="ordenarPorAnhoConstruccionAntiguos()">Más Antiguos 
+                    @if(filtroAntiguos){
+                        <i class="pi pi-filter-fill" style="font-size: 1rem; color: white;"></i>
+                      }@else{
+                        <i class="pi pi-filter" style="font-size: 1rem; color: white;"></i>
+                      }
+                </button>
+                <button (click)="ordenarPorAnhoConstruccionNuevos()">Más Modernos 
+                    @if(filtroNuevos){
+                        <i class="pi pi-filter-fill" style="font-size: 1rem; color: white;"></i>
+                      }@else{
+                        <i class="pi pi-filter" style="font-size: 1rem; color: white;"></i>
+                      }
+                </button>
             </div>
             @for(circuito of circuitos; track circuito.id) {
             <div class="item-card">

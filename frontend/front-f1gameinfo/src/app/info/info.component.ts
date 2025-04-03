@@ -13,6 +13,10 @@ export class InfoComponent {
   pilotos: any[] = [];
   circuitos: any[] = [];
   menuActivo: boolean = false;
+  filtroVictorias: boolean = false;
+  filtroCarreras: boolean = false;
+  filtroAntiguos: boolean = false;
+  filtroNuevos: boolean = false;
 
   constructor(private cartaService: CartaService) {}
 
@@ -27,14 +31,26 @@ export class InfoComponent {
 
   ordenarPorVictorias() {
     this.pilotos.sort((a, b) => b.victorias - a.victorias);
+    this.filtroVictorias = true;
+    this.filtroCarreras = false;
   }
 
   ordenarPorCarreras() {
     this.pilotos.sort((a, b) => b.carreras - a.carreras);
+    this.filtroVictorias = false;
+    this.filtroCarreras = true;
   }
 
-  ordenarPorAnhoConstruccion() {
+  ordenarPorAnhoConstruccionAntiguos() {
     this.circuitos.sort((a, b) => a.anhoConstruccion - b.anhoConstruccion);
+    this.filtroAntiguos = true;
+    this.filtroNuevos = false;
+  }
+
+  ordenarPorAnhoConstruccionNuevos() {
+    this.circuitos.sort((a, b) => b.anhoConstruccion - a.anhoConstruccion);
+    this.filtroAntiguos = false;
+    this.filtroNuevos = true;
   }
 
   activarMenu() {
