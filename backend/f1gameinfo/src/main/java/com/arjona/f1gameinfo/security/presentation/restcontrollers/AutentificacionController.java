@@ -8,6 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,11 +18,10 @@ import com.arjona.f1gameinfo.presentation.config.StatusException;
 import com.arjona.f1gameinfo.security.UtilsJWT;
 import com.arjona.f1gameinfo.security.UtilsOTP;
 import com.arjona.f1gameinfo.security.integration.services.UsuarioServices;
-import com.arjona.f1gameinfo.security.payloads.LoginRequest;
+import com.arjona.f1gameinfo.security.payloads.JwtResponse;
 import com.arjona.f1gameinfo.security.payloads.RegisterRequest;
 import com.arjona.f1gameinfo.security.payloads.RegisterResponse;
 import com.warrenstrange.googleauth.GoogleAuthenticatorKey;
-import com.arjona.f1gameinfo.security.payloads.JwtResponse;
 
 /**
  * Controlador encargado de atender las
@@ -94,6 +94,17 @@ public class AutentificacionController {
         SecurityContextHolder.getContext().setAuthentication(autenticacion);
         String jwt = utilsJwt.generarJwt(autenticacion);
         return ResponseEntity.ok(new JwtResponse(jwt));
+    }
+    
+    @PutMapping("/actualizarpass")
+    public ResponseEntity<Void> actualizarPass(@RequestParam(required = true) String passActual,
+    		@RequestParam(required = true) String passNueva, 
+    		@RequestParam(required = true) Long id){
+    	
+    	usuarioServices.actualizarPass(passActual, passNueva, id);
+    	
+    	return ResponseEntity.ok().build();
+    	
     }
 
 }

@@ -19,5 +19,15 @@ public interface UsuarioServices {
 	 * @return {@link Usuario} creado
 	 */
 	Usuario registrarUsuario(String username, String password, String key);
+	
+	/**
+	 * Actualiza la contraseña de
+	 * un usuario existente
+	 * 
+	 * @param passActual
+	 * @param passNueva
+	 * @param id
+	 */
+	public void actualizarPass(String passActual, String passNueva, Long id);
 
 }

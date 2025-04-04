@@ -170,4 +170,17 @@ export class CartaService {
     return this.http.get(`https://clever-emotion-production.up.railway.app/usuarios/${id}/monedas`, headers);
   }
 
+  actualizarPass(passActual:string, passNueva:string){
+    const storedToken = localStorage.getItem('token');
+    const token = storedToken ? JSON.parse(storedToken).token : null;
+
+    const id = this.getUserIdFromToken();
+    const params = new HttpParams()
+    .set('passActual', passActual)
+    .set('passNueva', passNueva)
+    .set('id', JSON.stringify(id));
+
+  return this.http.put('https://clever-emotion-production.up.railway.app/autentificacion/actualizarpass', null, { params });
+  }
+
 }
