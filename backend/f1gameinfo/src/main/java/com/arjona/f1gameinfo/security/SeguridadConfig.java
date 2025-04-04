@@ -42,6 +42,7 @@ public class SeguridadConfig {
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/autentificacion/**").permitAll()
                 .requestMatchers("/uploads/images/**").permitAll()
+                .requestMatchers("/uploads/images/usuarios/**").permitAll()
                 .anyRequest().authenticated())
             .addFilterBefore(filtroAutentificacionJWT(), UsernamePasswordAuthenticationFilter.class)
             .addFilterBefore(filtroAutentificacionOTP(), UsernamePasswordAuthenticationFilter.class);

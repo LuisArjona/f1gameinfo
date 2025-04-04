@@ -88,7 +88,7 @@ public class CartaServicesImpl implements CartaServices{
 
 	    Usuario usuario = usuarioRepository.findById(id).get();
 
-	    String rutaBase = System.getProperty("user.dir");
+	    String rutaBase = "/uploads/images/usuarios"; // Updated mount path
 	    String nombreArchivo = imagen.getOriginalFilename();
 
 	    if (nombreArchivo == null || nombreArchivo.trim().isEmpty()) {
@@ -99,13 +99,14 @@ public class CartaServicesImpl implements CartaServices{
 	    int index = nombreArchivo.lastIndexOf('.');
 	    if (index > 0) {
 	        extension = nombreArchivo.substring(index);
+	    }
 
 	    String nuevoNombreArchivo = id + "-" + String.format("%06d", (int) (Math.random() * 1000000)) + extension;
-	    File file = new File(rutaBase + "/uploads/images/" + nuevoNombreArchivo);
+	    File file = new File(rutaBase + "/" + nuevoNombreArchivo); // Updated file path
 
 	    while (file.exists()) {
 	        nuevoNombreArchivo = id + "-" + String.format("%06d", (int) (Math.random() * 1000000)) + extension;
-	        file = new File(rutaBase + "/uploads/images/" + nuevoNombreArchivo);
+	        file = new File(rutaBase + "/" + nuevoNombreArchivo); // Updated file path
 	    }
 
 	    try {
@@ -117,10 +118,10 @@ public class CartaServicesImpl implements CartaServices{
 	    CartaUsuario carta = new CartaUsuario();
 	    carta.setUsuario(usuario);
 	    carta.setValoracion(valoracion);
-	    carta.setRutaImagen("/uploads/images/" + nuevoNombreArchivo);
+	    carta.setRutaImagen("/uploads/images/usuarios/" + nuevoNombreArchivo); // Updated image path
 	    cartaUsuarioRepository.save(carta);
-	    }
 	}
+
 
 	@Override
 	public CartaUsuarioDTO getCartaUsuario(Long id) {
