@@ -26,32 +26,59 @@ export class ComprarcartasComponent {
   ngOnInit() {
     this.cartaService.getPilotos().subscribe((data) => {
       this.pilotos = data;
+      this.ordenarPilotos();
     });
-
+  
     this.cartaService.getCircuitos().subscribe((data) => {
       this.circuitos = data;
+      this.ordenarCircuitos();
     });
-
+  
     this.cartaService.getMonedasFromUsuario().subscribe((data) => {
       this.monedas = data;
     });
-
+  
     this.cartaService.getCartasCompradas().subscribe((data) => {
       this.pilotosUsu = Array.from(data.pilotos);
       this.circuitosUsu = Array.from(data.circuitos);
+      this.ordenarPilotos();
+      this.ordenarCircuitos();
     });
   }
+  
+
+  ordenarPilotos() {
+    this.pilotos.sort((a, b) => {
+      const aComprado = this.pilotosUsu.some(p => p.id === a.id);
+      const bComprado = this.pilotosUsu.some(p => p.id === b.id);
+      return (aComprado === bComprado) ? 0 : aComprado ? 1 : -1;
+    });
+  }
+  
+  ordenarCircuitos() {
+    this.circuitos.sort((a, b) => {
+      const aComprado = this.circuitosUsu.some(c => c.id === a.id);
+      const bComprado = this.circuitosUsu.some(c => c.id === b.id);
+      return (aComprado === bComprado) ? 0 : aComprado ? 1 : -1;
+    });
+  }  
 
   comprarPiloto(piloto: any) {
     if (this.monedas >= piloto.precio) {
       this.cartaService.actualizarCartasUsuario(this.monedas - piloto.precio, piloto.id).subscribe(() => {
         this.pilotosUsu.push(piloto);
         this.monedas -= piloto.precio;
+        this.ordenarPilotos();
         this.messageService.add({severity:'success', 
           summary:'Compra Exitosa', 
           detail:`Has añadido a ${piloto.nombre} a tu colección`,
           life: 5000 });
       });
+    }else{
+      this.messageService.add({severity:'error', 
+        summary:'Error', 
+        detail:`No tienes suficientes monedas para añadir a ${piloto.nombre} a tu colección`,
+        life: 5000 });
     }
   }
 
@@ -60,20 +87,26 @@ export class ComprarcartasComponent {
       this.cartaService.actualizarCartasUsuario(this.monedas - circuito.precio, undefined, circuito.id).subscribe(() => {
         this.circuitosUsu.push(circuito);
         this.monedas -= circuito.precio;
-        this.messageService.add({severity:'success', 
+        this.ordenarCircuitos();
+        this.messageService.add({severity:'error', 
           summary:'Compra Exitosa', 
           detail:`Has añadido a ${circuito.nombre} a tu colección`,
           life: 5000 });
       });
+    }else{
+      this.messageService.add({severity:'success', 
+        summary:'Error', 
+        detail:`No tienes suficientes monedas para añadir a ${circuito.nombre} a tu colección`,
+        life: 5000 });
     }
   }
 
   isPilotoDisabled(piloto: any): boolean {
-    return this.monedas < piloto.precio || this.pilotosUsu.some(p => p.id === piloto.id);
+    return this.pilotosUsu.some(p => p.id === piloto.id);
   }
   
   isCircuitoDisabled(circuito: any): boolean {
-    return this.monedas < circuito.precio || this.circuitosUsu.some(c => c.id === circuito.id);
+    return this.circuitosUsu.some(c => c.id === circuito.id);
   }
 
   isCircuitoComprado(circuito: any): boolean {
