@@ -30,6 +30,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.testcontainers.containers.MySQLContainer;
 
+import com.arjona.f1gameinfo.business.model.RankingDTO;
 import com.arjona.f1gameinfo.business.model.UsuarioDTO;
 import com.arjona.f1gameinfo.business.services.CircuitoServices;
 import com.arjona.f1gameinfo.business.services.UsuarioNoAuthServices;
@@ -114,9 +115,9 @@ public class UsuarioNoAuthControllerTest {
 		this.mockFiltro();
 		String jwtToken = "Bearer " + this.generateJwt();
 		
-		UsuarioDTO dto1 = new UsuarioDTO();
+		RankingDTO dto1 = new RankingDTO();
 		dto1.setCantidadCircuitos(5);
-		UsuarioDTO dto2 = new UsuarioDTO();
+		RankingDTO dto2 = new RankingDTO();
 		dto2.setCantidadCircuitos(5);
 		
 		when(usuarioNoAuthServices.getRanking()).thenReturn(Arrays.asList(dto1, dto2));
