@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.arjona.f1gameinfo.business.model.RankingDTO;
 import com.arjona.f1gameinfo.business.model.UsuarioDTO;
 import com.arjona.f1gameinfo.business.services.UsuarioNoAuthServices;
 
@@ -34,7 +35,7 @@ public class UsuarioNoAuthController {
 	 * @return {@code 200 OK} con {@code List} con los usuarios
 	 */
 	@GetMapping("/ranking")
-	public List<UsuarioDTO> getRanking(){
+	public List<RankingDTO> getRanking(){
 		return usuarioNoAuthServices.getRanking();
 	}
 	

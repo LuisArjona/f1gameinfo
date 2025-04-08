@@ -2,6 +2,7 @@ package com.arjona.f1gameinfo.business.services;
 
 import java.util.List;
 
+import com.arjona.f1gameinfo.business.model.RankingDTO;
 import com.arjona.f1gameinfo.business.model.UsuarioDTO;
 
 /**
@@ -16,7 +17,7 @@ public interface UsuarioNoAuthServices {
 	 * 
 	 * @return {@code List} del ranking
 	 */
-	List<UsuarioDTO> getRanking();
+	List<RankingDTO> getRanking();
 	
 	/**
 	 * Devuelve las monedas del

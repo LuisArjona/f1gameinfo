@@ -16,7 +16,7 @@
       opacity: 1;
     }
 }
-  
+
   .navbar {
     display: flex;
     align-items: center;
@@ -30,12 +30,12 @@
     position: relative;
     font-family: Arial, sans-serif;
   }
-  
+
   .navbar-logo img {
     width: 50px;
     height: auto;
   }
-  
+
   .navbar-toggle {
     display: none;
     background: none;
@@ -44,7 +44,7 @@
     font-size: 24px;
     cursor: pointer;
   }
-  
+
   .navbar-links {
     list-style: none;
     display: flex;
@@ -53,16 +53,16 @@
     padding: 0;
     transition: max-height 0.3s ease, opacity 0.3s ease;
   }
-  
+
   .navbar-links.active {
     max-height: 300px;
     opacity: 1;
   }
-  
+
   .navbar-links li {
     margin: 0;
   }
-  
+
   .navbar-links a {
     text-decoration: none;
     color: #ffffff;
@@ -70,34 +70,34 @@
     font-weight: bold;
     transition: color 0.3s ease, transform 0.2s ease;
   }
-  
+
   .navbar-links a:hover {
     color: #f0c14b;
     transform: scale(1.05);
   }
-  
+
   .navbar-links .router-link-active {
     text-decoration: underline;
     color: #f0c14b;
   }
-  
+
   .ranking-container {
     margin-top: 20px;
     text-align: center;
   }
-  
+
   .ranking-container h2 {
     color: #d71920;
     margin-bottom: 20px;
   }
-  
+
   .ranking-list {
     display: flex;
     flex-direction: column;
     gap: 15px;
     align-items: center;
   }
-  
+
   .ranking-item {
     display: flex;
     align-items: center;
@@ -110,56 +110,56 @@
     border-left: 5px solid #d71920;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
-  
+
   .ranking-item:hover {
     transform: scale(1.05);
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
   }
-  
+
   .ranking-position {
     font-size: 24px;
     font-weight: bold;
     margin-right: 15px;
   }
-  
+
   .ranking-position.gold {
     color: #FFD700;
   }
-  
+
   .ranking-position.silver {
     color: #C0C0C0;
   }
-  
+
   .ranking-position.bronze {
     color: #CD7F32;
   }
-  
+
   .ranking-info {
     flex: 1;
     text-align: left;
   }
-  
+
   .username {
     font-weight: bold;
     font-size: 18px;
     color: #000000;
     margin-right: 10px;
   }
-  
+
   .detalles {
     font-size: 14px;
     color: #555555;
     display: flex;
     gap: 20px;
   }
-  
+
   .filtros {
     display: flex;
     gap: 15px;
     justify-content: center;
     margin-bottom: 20px;
   }
-  
+
   .filtros button {
     padding: 10px 15px;
     background-color: #d71920;
@@ -171,27 +171,139 @@
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
   }
-  
+
   .filtros button:hover {
     background-color: #b7151a;
     transform: scale(1.05);
   }
-  
+
   .filtros button:active {
     background-color: #8f0f14;
     transform: scale(0.95);
   }
-  
+
+.coleccion-container {
+  padding: 1rem;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.coleccion-container h3 {
+  color: #d71920;
+  margin: 1.5rem 0 1rem;
+  font-size: 1.4rem;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 0.5rem;
+}
+
+.pilotos-grid, .circuitos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.piloto-card, .circuito-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.piloto-card:hover, .circuito-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  border-color: #d71920;
+}
+
+.piloto-imagen, .circuito-imagen {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-bottom: 1px solid #eee;
+}
+
+.piloto-info, .circuito-info {
+  padding: 0.8rem;
+  text-align: center;
+}
+
+.piloto-info h4, .circuito-info h4 {
+  margin: 0 0 0.3rem;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.piloto-info p, .circuito-info p {
+  margin: 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.empty-message {
+  color: #777;
+  font-style: italic;
+  padding: 1rem;
+  text-align: center;
+  grid-column: 1 / -1;
+}
+
+.ranking-item {
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.ranking-item:hover {
+  background-color: #f5f5f5;
+}
+
+
+
+.p-drawer {
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.p-drawer-header {
+  background-color: #d71920;
+  color: white;
+  padding: 1rem;
+  font-weight: bold;
+}
+
+.p-drawer-content {
+  background-color: #f9f9f9;
+  overflow-y: auto;
+}
+
+.p-drawer-close {
+  color: white !important;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.piloto-card, .circuito-card {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.piloto-card:nth-child(1) { animation-delay: 0.1s; }
+.piloto-card:nth-child(2) { animation-delay: 0.2s; }
+.piloto-card:nth-child(3) { animation-delay: 0.3s; }
+
   @media (max-width: 900px) {
     .navbar {
       flex-direction: column;
       align-items: flex-start;
     }
-  
+
     .navbar-toggle {
       display: block;
     }
-  
+
     .navbar-links {
       flex-direction: column;
       max-height: 0;
@@ -200,12 +312,12 @@
       gap: 10px;
       width: 100%;
     }
-  
+
     .navbar-links.active {
       opacity: 1;
       max-height: 300px;
     }
-  
+
     .navbar-links a {
       font-size: 14px;
       padding: 5px 0;
@@ -214,19 +326,47 @@
       text-align: left;
     }
   }
-  
+
+  @media (max-width: 768px) {
+    .pilotos-grid, .circuitos-grid {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+
+    .piloto-imagen, .circuito-imagen {
+      height: 140px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .pilotos-grid, .circuitos-grid {
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 1rem;
+    }
+
+    .piloto-info h4, .circuito-info h4 {
+      font-size: 1rem;
+    }
+
+    .piloto-info, .circuito-info {
+      padding: 0.6rem;
+    }
+
+    .coleccion-container h3 {
+      font-size: 1.2rem;
+    }
+  }
+
   @media (max-width: 480px) {
     .navbar-logo img {
       width: 40px;
     }
-  
+
     .navbar-links a {
       font-size: 12px;
       padding: 4px 0;
     }
-  
+
     .navbar {
       padding: 10px;
     }
   }
-  

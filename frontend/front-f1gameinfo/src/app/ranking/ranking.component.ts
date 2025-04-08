@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { CartaService } from '../carta.service';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { DrawerModule } from 'primeng/drawer';
 
 @Component({
   selector: 'app-ranking',
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, DrawerModule],
   templateUrl: './ranking.component.html',
   styleUrl: './ranking.component.css'
 })
@@ -16,6 +17,9 @@ export class RankingComponent {
   filtroTotal:boolean = true;
   filtroPilotos:boolean = false;
   filtroCircuitos:boolean = false;
+  visible:boolean = false;
+  usuarioSeleccionado: any = null;
+  drawerHeader: string = 'Colección del Usuario';
 
   constructor(private cartaService: CartaService) {}
 
@@ -24,6 +28,12 @@ export class RankingComponent {
       this.ranking = data;
       this.originalRanking = [...data];
     });
+  }
+
+  mostrarColeccion(user: any) {
+    this.usuarioSeleccionado = user;
+    this.drawerHeader = `Colección de ${user.username.split('@')[0]}`;
+    this.visible = true;
   }
 
   ordenarPorTotal() {
@@ -66,5 +76,5 @@ export class RankingComponent {
     this.filtroPilotos = false;
     this.filtroCircuitos = true;
   }
-  
+
 }

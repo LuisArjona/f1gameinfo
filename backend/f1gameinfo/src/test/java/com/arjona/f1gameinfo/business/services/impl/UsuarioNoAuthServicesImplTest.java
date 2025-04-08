@@ -13,6 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.arjona.f1gameinfo.business.model.RankingDTO;
 import com.arjona.f1gameinfo.business.model.UsuarioDTO;
 import com.arjona.f1gameinfo.security.integration.repositories.UsuarioRepository;
 
@@ -30,13 +31,15 @@ public class UsuarioNoAuthServicesImplTest {
 	
 	@Test
 	void testGetRanking() {
-		UsuarioDTO dto1 = new UsuarioDTO("prueba1", 10, 3, 13);
-		UsuarioDTO dto2 = new UsuarioDTO("prueba2", 5, 6, 11);
-		List<UsuarioDTO> esperado = Arrays.asList(dto1, dto2);
+		RankingDTO dto1 = new RankingDTO("prueba1", 10, 3, 13, null, null);
+		RankingDTO dto2 = new RankingDTO("prueba2", 5, 6, 11, null, null);
+		UsuarioDTO dto1v1 = new UsuarioDTO("prueba1", 10, 3, 13);
+		UsuarioDTO dto2v1 = new UsuarioDTO("prueba2", 5, 6, 11);
+		List<RankingDTO> esperado = Arrays.asList(dto1, dto2);
 		
-		when(usuarioRepository.getAllUsuariosRanking()).thenReturn(esperado);
+		when(usuarioRepository.getAllUsuariosRanking()).thenReturn(Arrays.asList(dto1v1, dto2v1));
 		
-		List<UsuarioDTO> respuesta = usuarioNoAuthServices.getRanking();
+		List<RankingDTO> respuesta = usuarioNoAuthServices.getRanking();
 		assertEquals(esperado, respuesta);
 	}
 	

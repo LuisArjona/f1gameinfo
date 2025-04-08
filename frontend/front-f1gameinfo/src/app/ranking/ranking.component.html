@@ -18,21 +18,21 @@
   <div class="ranking-container">
     <h2>Ranking de Usuarios</h2>
     <div class="filtros">
-      <button (click)="ordenarPorTotal()">Ordenar por Total 
+      <button (click)="ordenarPorTotal()">Ordenar por Total
         @if(filtroTotal){
           <i class="pi pi-filter-fill" style="font-size: 1rem; color: white;"></i>
         }@else{
           <i class="pi pi-filter" style="font-size: 1rem; color: white;"></i>
         }
       </button>
-      <button (click)="ordenarPorPilotos()">Ordenar por Pilotos 
+      <button (click)="ordenarPorPilotos()">Ordenar por Pilotos
         @if(filtroPilotos){
           <i class="pi pi-filter-fill" style="font-size: 1rem; color: white;"></i>
         }@else{
           <i class="pi pi-filter" style="font-size: 1rem; color: white;"></i>
         }
       </button>
-      <button (click)="ordenarPorCircuitos()">Ordenar por Circuitos 
+      <button (click)="ordenarPorCircuitos()">Ordenar por Circuitos
         @if(filtroCircuitos){
           <i class="pi pi-filter-fill" style="font-size: 1rem; color: white;"></i>
         }@else{
@@ -42,8 +42,8 @@
     </div>
     <div class="ranking-list">
       @for(user of ranking; track user.username) {
-      <div class="ranking-item">
-        <div 
+      <div class="ranking-item" (click)="mostrarColeccion(user)">
+        <div
           class="ranking-position"
           [ngClass]="{'gold': ranking.indexOf(user) === 0,
             'silver': ranking.indexOf(user) === 1,
@@ -59,3 +59,36 @@
     </div>
   </div>
 </div>
+<p-drawer [(visible)]="visible" [header]="drawerHeader">
+  <div class="coleccion-container">
+    <h3>Pilotos</h3>
+    <div class="pilotos-grid">
+      @for(piloto of usuarioSeleccionado?.pilotos; track piloto.id) {
+        <div class="piloto-card">
+          <img src="https://clever-emotion-production.up.railway.app{{piloto.rutaImagen}}" [alt]="piloto.nombre" class="piloto-imagen">
+          <div class="piloto-info">
+            <h4>{{ piloto.nombre }}</h4>
+            <p>{{ piloto.nombreEquipo }}</p>
+          </div>
+        </div>
+      } @empty {
+        <p>No tiene pilotos en su colección</p>
+      }
+    </div>
+
+    <h3>Circuitos</h3>
+    <div class="circuitos-grid">
+      @for(circuito of usuarioSeleccionado?.circuitos; track circuito.id) {
+        <div class="circuito-card">
+          <img src="https://clever-emotion-production.up.railway.app{{circuito.rutaImagen}}" [alt]="circuito.nombre" class="circuito-imagen">
+          <div class="circuito-info">
+            <h4>{{ circuito.nombre }}</h4>
+            <p>{{ circuito.pais }}</p>
+          </div>
+        </div>
+      } @empty {
+        <p>No tiene circuitos en su colección</p>
+      }
+    </div>
+  </div>
+</p-drawer>

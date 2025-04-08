@@ -64,6 +64,22 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 	 * @param id del usuario
 	 * @return {@code Set} de pilotos
 	 */
+	@Query("SELECT u.pilotos FROM Usuario u WHERE u.username = :username")
+	Set<Piloto> findPilotosByUsername(@Param("username") String username);
+
+	/**
+	 * Devuelve los circuitos propiedad de un usuario
+	 * @param id del usuario
+	 * @return {@code Set} de circuitos
+	 */
+	@Query("SELECT u.circuitos FROM Usuario u WHERE u.username = :username")
+	Set<Circuito> findCircuitosByUsername(@Param("username") String username);
+	
+	/**
+	 * Devuelve los pilotos propiedad de un usuario
+	 * @param id del usuario
+	 * @return {@code Set} de pilotos
+	 */
 	@Query("SELECT u.pilotos FROM Usuario u WHERE u.id = :id")
 	Set<Piloto> findPilotosById(@Param("id") Long id);
 

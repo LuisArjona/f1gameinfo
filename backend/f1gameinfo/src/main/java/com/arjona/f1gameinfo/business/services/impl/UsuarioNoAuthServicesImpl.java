@@ -1,9 +1,11 @@
 package com.arjona.f1gameinfo.business.services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.arjona.f1gameinfo.business.model.RankingDTO;
 import com.arjona.f1gameinfo.business.model.UsuarioDTO;
 import com.arjona.f1gameinfo.business.services.UsuarioNoAuthServices;
 import com.arjona.f1gameinfo.security.integration.repositories.UsuarioRepository;
@@ -23,8 +25,18 @@ public class UsuarioNoAuthServicesImpl implements UsuarioNoAuthServices{
 	}
 
 	@Override
-	public List<UsuarioDTO> getRanking() {
-		return usuarioRepository.getAllUsuariosRanking();
+	public List<RankingDTO> getRanking() {
+		List<UsuarioDTO> usuarios = usuarioRepository.getAllUsuariosRanking();
+		List<RankingDTO> ranking = new ArrayList();
+		for(int i = 0; i < usuarios.size(); i++) {
+			UsuarioDTO dto = usuarios.get(i);
+			ranking.add(new RankingDTO(dto.getUsername(), 
+					dto.getCantidadPilotos(), dto.getCantidadCircuitos(), 
+					dto.getCantidadTotal(), 
+					usuarioRepository.findPilotosByUsername(dto.getUsername()), 
+					usuarioRepository.findCircuitosByUsername(dto.getUsername())));
+		}
+		return ranking;
 	}
 
 	@Override
