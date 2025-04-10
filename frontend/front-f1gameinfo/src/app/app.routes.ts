@@ -6,13 +6,15 @@ import { RankingComponent } from './ranking/ranking.component';
 import { CartasusuariosComponent } from './cartasusuarios/cartasusuarios.component';
 import { ComprarcartasComponent } from './comprarcartas/comprarcartas.component';
 import { CrearcartaComponent } from './crearcarta/crearcarta.component';
+import { AuthGuard } from './auth.guard';
 
 export const routes: Routes = [
     {path: 'register',component:RegistrarComponent},
     {path:"login",component:LoguearComponent},
-    {path:"info",component:InfoComponent},
-    {path:"ranking",component:RankingComponent},
-    {path:"comprarcartas",component:ComprarcartasComponent},
-    {path:"crearcarta",component:CrearcartaComponent},
-    {path:"cartasusuarios",component:CartasusuariosComponent}
+    {path:"**",component:LoguearComponent},
+    {path:"info",component:InfoComponent, canActivate: [AuthGuard]},
+    {path:"ranking",component:RankingComponent, canActivate: [AuthGuard]},
+    {path:"comprarcartas",component:ComprarcartasComponent, canActivate: [AuthGuard]},
+    {path:"crearcarta",component:CrearcartaComponent, canActivate: [AuthGuard]},
+    {path:"cartasusuarios",component:CartasusuariosComponent, canActivate: [AuthGuard]}
 ];

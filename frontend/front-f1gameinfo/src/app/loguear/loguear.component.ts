@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UsuarioServicioService } from '../usuario-servicio.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { InputOtpModule } from 'primeng/inputotp';
 import { InputTextModule } from 'primeng/inputtext';
@@ -24,13 +24,14 @@ export class LoguearComponent {
   cargando: boolean = false;
 
 
-  constructor(private usuService: UsuarioServicioService, private router: Router) {}
+  constructor(private usuService: UsuarioServicioService, private router: Router, private route: ActivatedRoute) {}
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
 
   loguearUsuario() {
+    const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/info';
     this.cargando = true;
     this.usuService.loguearUsuarioDos(this.email, this.pass, this.otp).subscribe({
       next: (data) => {
@@ -39,7 +40,7 @@ export class LoguearComponent {
         if (token) {
           localStorage.setItem("token", JSON.stringify(token));
           this.exito = true;
-          
+
           Swal.fire({
             title: "¡Bienvenido " + this.email.split('@')[0] + "!",
             text: "Inicio de sesión exitoso.",
@@ -48,7 +49,7 @@ export class LoguearComponent {
             timerProgressBar: true,
             showConfirmButton: false,
             willClose: () => {
-              this.router.navigate(["/info"]);
+              this.router.navigateByUrl(returnUrl);
             }
           });
         }
@@ -56,7 +57,7 @@ export class LoguearComponent {
       error: (error) => {
         this.cargando = false;
         let errorMessage = "Ha ocurrido un error inesperado";
-        
+
         if (error.status === 401) {
           errorMessage = "El usuario o la contraseña no son correctos";
         } else if (error.status === 403) {
@@ -72,7 +73,7 @@ export class LoguearComponent {
           confirmButtonText: "Entendido",
           confirmButtonColor: "#d71920"
         });
-        
+
         this.exito = false;
         this.intentado = true;
       }

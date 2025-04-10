@@ -11,7 +11,7 @@
         <li><a [routerLink]="['/crearcarta']" routerLinkActive="router-link-active">Crea tu Carta</a></li>
         <li><a [routerLink]="['/cartasusuarios']" routerLinkActive="router-link-active">Cartas de Otros Usuarios</a></li>
         <li><a [routerLink]="['/ranking']" routerLinkActive="router-link-active">Ranking</a></li>
-        <li><a href="#" (click)="cerrarSesion()">Cerrar Sesion</a></li>
+        <li><a [routerLink]="['/login']" (click)="cerrarSesion()">Cerrar Sesion</a></li>
     </ul>
 </nav>
 <div class="container">
@@ -52,18 +52,18 @@
             </div>
             }
         </div>
-  
+
         <div class="section">
             <h2>Circuitos</h2>
             <div class="filters">
-                <button (click)="ordenarPorAnhoConstruccionAntiguos()">Más Antiguos 
+                <button (click)="ordenarPorAnhoConstruccionAntiguos()">Más Antiguos
                     @if(filtroAntiguos){
                         <i class="pi pi-filter-fill" style="font-size: 1rem; color: white;"></i>
                       }@else{
                         <i class="pi pi-filter" style="font-size: 1rem; color: white;"></i>
                       }
                 </button>
-                <button (click)="ordenarPorAnhoConstruccionNuevos()">Más Modernos 
+                <button (click)="ordenarPorAnhoConstruccionNuevos()">Más Modernos
                     @if(filtroNuevos){
                         <i class="pi pi-filter-fill" style="font-size: 1rem; color: white;"></i>
                       }@else{
@@ -85,4 +85,3 @@
         </div>
     </div>
   </div>
-  

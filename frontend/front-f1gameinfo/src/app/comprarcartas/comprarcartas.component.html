@@ -11,7 +11,7 @@
         <li><a [routerLink]="['/crearcarta']" routerLinkActive="router-link-active">Crea tu Carta</a></li>
         <li><a [routerLink]="['/cartasusuarios']" routerLinkActive="router-link-active">Cartas de Otros Usuarios</a></li>
         <li><a [routerLink]="['/ranking']" routerLinkActive="router-link-active">Ranking</a></li>
-        <li><a href="#" (click)="cerrarSesion()">Cerrar Sesion</a></li>
+        <li><a [routerLink]="['/login']" (click)="cerrarSesion()">Cerrar Sesion</a></li>
     </ul>
 </nav>
 <div class="container">
@@ -41,7 +41,7 @@
                         <p><i class="pi pi-trophy" style="font-size: 1.2rem; color: gold;"></i><strong> Victorias:</strong> {{ piloto.victorias }}</p>
                         <p><i class="pi pi-trophy" style="font-size: 1.2rem; color: silver;"></i><strong> Podios:</strong> {{ piloto.podios }}</p>
                     </div>
-                    <button 
+                    <button
                         [disabled]="isPilotoDisabled(piloto)"
                         (click)="comprarPiloto(piloto)"
                         class="boton-carta">
@@ -70,7 +70,7 @@
                         <p><i class="pi pi-map-marker" style="font-size: 1.2rem; color: red;"></i><strong> País:</strong> {{ circuito.pais }}</p>
                         <p><i class="pi pi-money-bill" style="font-size: 1.2rem; color: green;"></i><strong> Precio:</strong> {{ circuito.precio }}</p>
                     </div>
-                    <button 
+                    <button
                         [disabled]="isCircuitoDisabled(circuito)"
                         (click)="comprarCircuito(circuito)"
                         class="boton-carta">
