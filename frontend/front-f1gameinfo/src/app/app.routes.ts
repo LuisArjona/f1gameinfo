@@ -9,12 +9,12 @@ import { CrearcartaComponent } from './crearcarta/crearcarta.component';
 import { AuthGuard } from './auth.guard';
 
 export const routes: Routes = [
-    {path: 'register',component:RegistrarComponent},
-    {path:"login",component:LoguearComponent},
-    {path:"**",component:LoguearComponent},
-    {path:"info",component:InfoComponent, canActivate: [AuthGuard]},
-    {path:"ranking",component:RankingComponent, canActivate: [AuthGuard]},
-    {path:"comprarcartas",component:ComprarcartasComponent, canActivate: [AuthGuard]},
-    {path:"crearcarta",component:CrearcartaComponent, canActivate: [AuthGuard]},
-    {path:"cartasusuarios",component:CartasusuariosComponent, canActivate: [AuthGuard]}
+  {path: 'register', component: RegistrarComponent},
+  {path: 'login', component: LoguearComponent},
+  {path: 'info', component: InfoComponent, canActivate: [AuthGuard]},
+  {path: 'ranking', component: RankingComponent, canActivate: [AuthGuard]},
+  {path: 'comprarcartas', component: ComprarcartasComponent, canActivate: [AuthGuard]},
+  {path: 'crearcarta', component: CrearcartaComponent, canActivate: [AuthGuard]},
+  {path: 'cartasusuarios', component: CartasusuariosComponent, canActivate: [AuthGuard]},
+  {path: '**', redirectTo: 'login'}
 ];
