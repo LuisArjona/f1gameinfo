@@ -22,7 +22,7 @@ export class ComprarcartasComponent {
   monedas: number = 0;
   menuActivo: boolean = false;
   visible:boolean = false;
-  drawerHeader: string = 'Colección del Usuario';
+  drawerHeader: string = 'Mi colección';
 
   constructor(private cartaService: CartaService, private messageService: MessageService) {}
 
