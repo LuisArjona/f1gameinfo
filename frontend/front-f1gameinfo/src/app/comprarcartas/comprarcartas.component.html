@@ -20,6 +20,8 @@
         <span><i class="pi pi-money-bill" style="font-size: 2rem; color: green;"></i></span>
         <div class="monedas">{{ monedas }}</div>
         <button class="obtener-monedas" (click)="incrementarMonedas()">+100 <i class="pi pi-money-bill" style="font-size: 1.4rem; color: green;"></i></button>
+        <button class="obtener-monedas" (click)="mostrarColeccion()">Ver tu colección</button>
+        (click)="mostrarColeccion(user)
     </div>
 
     <div class="compras-container">
@@ -87,3 +89,37 @@
     </div>
 </div>
 <p-toast position="top-left"></p-toast>
+
+<p-drawer [(visible)]="visible" [header]="drawerHeader">
+  <div class="coleccion-container">
+    <h3>Pilotos</h3>
+    <div class="pilotos-grid">
+      @for(piloto of pilotosUsu; track piloto.id) {
+        <div class="piloto-card">
+          <img src="https://clever-emotion-production.up.railway.app{{piloto.rutaImagen}}" [alt]="piloto.nombre" class="piloto-imagen">
+          <div class="piloto-info">
+            <h4>{{ piloto.nombre }}</h4>
+            <p>{{ piloto.nombreEquipo }}</p>
+          </div>
+        </div>
+      } @empty {
+        <p>Aún no tienes ningún piloto. ¡Consigue monedas para coleccionarlos!</p>
+      }
+    </div>
+
+    <h3>Circuitos</h3>
+    <div class="circuitos-grid">
+      @for(circuito of circuitosUsu; track circuito.id) {
+        <div class="circuito-card">
+          <img src="https://clever-emotion-production.up.railway.app{{circuito.rutaImagen}}" [alt]="circuito.nombre" class="circuito-imagen">
+          <div class="circuito-info">
+            <h4>{{ circuito.nombre }}</h4>
+            <p>{{ circuito.pais }}</p>
+          </div>
+        </div>
+      } @empty {
+        <p>Aún no tienes ningún circuito. ¡Consigue monedas para coleccionarlos!</p>
+      }
+    </div>
+  </div>
+</p-drawer>

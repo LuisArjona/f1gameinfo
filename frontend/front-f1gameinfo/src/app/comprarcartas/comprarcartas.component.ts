@@ -5,10 +5,11 @@ import { CommonModule } from '@angular/common';
 import { ProgressBar, ProgressBarModule } from 'primeng/progressbar';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { DrawerModule } from 'primeng/drawer';
 
 @Component({
   selector: 'app-comprarcartas',
-  imports: [RouterModule, CommonModule, ProgressBarModule, ToastModule],
+  imports: [RouterModule, CommonModule, ProgressBarModule, ToastModule, DrawerModule],
   templateUrl: './comprarcartas.component.html',
   styleUrl: './comprarcartas.component.css',
   providers: [MessageService]
@@ -20,6 +21,8 @@ export class ComprarcartasComponent {
   circuitosUsu: any[] = [];
   monedas: number = 0;
   menuActivo: boolean = false;
+  visible:boolean = false;
+  drawerHeader: string = 'Colección del Usuario';
 
   constructor(private cartaService: CartaService, private messageService: MessageService) {}
 
@@ -133,6 +136,10 @@ export class ComprarcartasComponent {
 
   getPorcentajeCircuitos(): number {
     return Math.round((this.circuitosUsu.length / this.circuitos.length) * 100);
+  }
+
+  mostrarColeccion() {
+    this.visible = true;
   }
 
   cerrarSesion(): void {
